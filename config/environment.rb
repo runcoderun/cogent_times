@@ -21,6 +21,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "do_postgres"
   config.gem "dm-core"
+  config.gem "dm-migrations"
   
 
   # Only load the plugins named here, in the order given (default is alphabetical).

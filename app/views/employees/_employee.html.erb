@@ -1,0 +1,9 @@
+<tr>
+	<td><%= employee.id %></td>
+	<td><%= employee.surname %></td>
+	<td><%= employee.first_name %></td>
+   <td><%= link_to "Edit", employee_url(employee.id), :class => "Edit" %></td>
+   <td><%= link_to "Delete", employee_url(employee.id), :method => :delete,
+          :confirm => "Are you sure you want to delete #{employee.surname}?",
+          :class => "Delete" %></td>
+</tr>
