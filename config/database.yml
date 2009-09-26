@@ -1,14 +1,14 @@
 development:
-    adapter: postgres
-    database: cogent_times_development
+    :adapter: postgres
+    :database: cogent_times_development
 
 test:
-    adapter: postgres
-    database: cogent_times_test
+    :adapter: postgres
+    :database: cogent_times_test
   
 production:
-    adapter: postgres
-    database: cogent_times_production
+    :adapter: postgres
+    :database: cogent_times_production
     # username: salary
     # password: salary06
  

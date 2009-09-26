@@ -1,4 +1,4 @@
-require 'dm-migrations/migration_runner'
+# require 'dm-migrations/migration_runner'
 
 migration 1, :create_employees do
   
