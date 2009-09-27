@@ -2,7 +2,7 @@ development:
     :adapter: postgres
     :database: cogent_times_development
 
-test:
+test: &TEST
     :adapter: postgres
     :database: cogent_times_test
   
@@ -13,3 +13,6 @@ production:
     # password: salary06
  
  
+
+cucumber:
+  <<: *TEST
