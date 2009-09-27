@@ -11,4 +11,5 @@ describe Employee do
   it "should create a new instance given valid attributes" do
     Employee.new(@valid_attributes)
   end
+  
 end
