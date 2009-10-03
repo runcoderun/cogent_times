@@ -447,7 +447,7 @@ module Ardes#:nodoc:
       
       unless included_modules.include? ResourcesController::InstanceMethods
         class_inheritable_reader :specifications, :route_name
-        class_inheritable_writer :specifications
+        class_inheritable_writer :specifications, :route_name
         hide_action :specifications, :route_name
         extend  ResourcesController::ClassMethods
         helper  ResourcesController::Helper
@@ -456,7 +456,7 @@ module Ardes#:nodoc:
 
       before_filter(:load_enclosing_resources, when_options) unless load_enclosing_resources_filter_exists?
       
-      # write_inheritable_attribute(:specifications, [])
+      write_inheritable_attribute(:specifications, [])
       specifications = []
       specifications << '*' unless options.delete(:load_enclosing) == false
       
@@ -468,7 +468,7 @@ module Ardes#:nodoc:
       route = (options.delete(:route) || name).to_s
       name = options[:singleton] ? name.to_s : name.to_s.singularize
       write_inheritable_attribute :route_name, options[:singleton] ? route : route.singularize
-      
+      route_name = options[:singleton] ? route : route.singularize
       nested_in(*options.delete(:in)) if options[:in]
       
       write_inheritable_attribute(:resource_specification, Specification.new(name, options, &block))
@@ -552,6 +552,11 @@ module Ardes#:nodoc:
     end
     
     module InstanceMethods
+      
+      def route_name_method
+        return self.class.read_inheritable_attribute(:route_name)
+      end
+
       def self.included(base)
         base.class_eval do
         protected

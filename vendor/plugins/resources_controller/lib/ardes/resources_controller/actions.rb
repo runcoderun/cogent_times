@@ -98,7 +98,7 @@
           if resource.save
             format.html do
               flash[:notice] = "#{resource_name.humanize} was successfully created."
-              redirect_to resource_url
+              redirect_to resources_url
             end
             format.js
             format.xml  { render :xml => resource, :status => :created, :location => resource_url }
@@ -119,7 +119,7 @@
           if resource.update_attributes(params[resource_name])
             format.html do
               flash[:notice] = "#{resource_name.humanize} was successfully updated."
-              redirect_to resource_url
+              redirect_to resources_url
             end
             format.js
             format.xml  { head :ok }

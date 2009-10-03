@@ -4,11 +4,6 @@ describe EmployeesController do
 
   integrate_views
   
-  #Delete this example and add some real ones
-  it "should use EmployeesController" do
-    controller.should be_an_instance_of(EmployeesController)
-  end
-
   it "should retrieve all instances for index" do
     Employee.all.destroy!
     Employee.make
@@ -25,6 +20,25 @@ describe EmployeesController do
     response.should render_template("show")
     assigns[:employee].should == employee
   end
+
+  it "should destroy one instance" do
+    Employee.all.destroy!
+    employee = Employee.make
+    get :destroy, :id => employee.id
+    response.should redirect_to("http://test.host/employees")
+    Employee.all.count.should == 0
+  end
   
+  it "should display new instance" do
+    employee = Employee.make
+    stub(Employee).new {employee}
+    put :new
+    response.should render_template("new")
+    assigns[:employee].should == employee
+  end
+  
+  # def new
+  # def create
+  # def update
   
 end

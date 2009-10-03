@@ -102,6 +102,7 @@ Currently:
       # passed something like (^|.*_)resource(s)_.*(url|path)$, will 
       # return the [route, route_method]  for the expanded resource
       def route_and_method_from_resource_method_and_name_prefix(method, name_prefix)
+        route_name = route_name_method
         route_method = method.to_s.sub(/resource(s)?/) { $1 ? "#{name_prefix}#{route_name.pluralize}" : "#{name_prefix}#{route_name}" }
         return [ActionController::Routing::Routes.named_routes.get(route_method.sub(/_(path|url)$/,'').to_sym), route_method]
       end
