@@ -17,11 +17,23 @@ describe EmployeesController do
   end
   
   def clear_instances
-    @model_class.all.destroy!
+    instances.destroy!
+  end
+  
+  def instances
+    @model_class.all
   end
   
   def make_new_instance
     @model_class.make
+  end
+
+  def cache_new_instance
+    @instance = make_new_instance
+  end
+  
+  def cached_instance
+    @instance || cache_new_instance
   end
   
   def should_render(template)
@@ -35,6 +47,10 @@ describe EmployeesController do
   def instance_var
     assigns[instance_sym]
   end
+
+  def check_index_displayed
+    response.should redirect_to("http://test.host/employees")
+  end
   
   it "should retrieve all instances for index" do
     clear_instances
@@ -46,30 +62,28 @@ describe EmployeesController do
   
   it "should retrieve one instance for show" do
     clear_instances
-    employee = make_new_instance
-    get :show, :id => employee.id
+    get :show, :id => cached_instance.id
     should_render("show")
-    instance_var.should == employee
+    instance_var.should == cached_instance
   end
 
   it "should destroy one instance" do
-    Employee.all.destroy!
-    employee = Employee.make
-    get :destroy, :id => employee.id
-    response.should redirect_to("http://test.host/employees")
-    Employee.all.count.should == 0
+    clear_instances
+    get :destroy, :id => cached_instance.id
+    check_index_displayed
+    instances.count.should == 0
   end
   
   it "should display new instance" do
-    employee = Employee.make
-    stub(Employee).new {employee}
+    cache_new_instance
+    stub(@model_class).new {cached_instance}
     put :new
-    response.should render_template("new")
-    assigns[:employee].should == employee
+    should_render("new")
+    instance_var.should == cached_instance
   end
   
   it "should create new instance" do
-    Employee.all.destroy!
+    clear_instances
     valid_attributes = {:first_name => 'Steve', :surname => 'Hayes'}
     put :create, :employee => valid_attributes
     response.should redirect_to("http://test.host/employees")
