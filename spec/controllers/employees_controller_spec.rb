@@ -6,6 +6,11 @@ describe EmployeesController do
   
   before(:each) do
     @model_class = Employee
+    @valid_attributes = {:first_name => 'Steve', :surname => 'Hayes'}
+  end
+  
+  def valid_attributes
+    @valid_attributes
   end
   
   def collection_sym
@@ -20,8 +25,17 @@ describe EmployeesController do
     instances.destroy!
   end
   
+  def leave_one_instance
+    clear_instances
+    make_new_instance
+  end
+  
   def instances
     @model_class.all
+  end
+  
+  def instance
+    @model_class.first
   end
   
   def make_new_instance
@@ -52,26 +66,33 @@ describe EmployeesController do
     response.should redirect_to("http://test.host/employees")
   end
   
+  def check_instance_count(count)
+    instances.should have(count).records
+  end
+  
+  def check_instance_attributes
+    instance.attributes.should == valid_attributes.merge(:id => instance.id)
+  end
+  
   it "should retrieve all instances for index" do
-    clear_instances
-    make_new_instance
+    leave_one_instance
     get :index
     should_render("index")
     collection_var.should have(1).record
   end
   
   it "should retrieve one instance for show" do
-    clear_instances
-    get :show, :id => cached_instance.id
+    leave_one_instance
+    get :show, :id => instance.id
     should_render("show")
-    instance_var.should == cached_instance
+    instance_var.should == instance
   end
 
   it "should destroy one instance" do
-    clear_instances
-    get :destroy, :id => cached_instance.id
+    leave_one_instance
+    delete :destroy, :id => instance.id
     check_index_displayed
-    instances.count.should == 0
+    check_instance_count(0)
   end
   
   it "should display new instance" do
@@ -84,23 +105,18 @@ describe EmployeesController do
   
   it "should create new instance" do
     clear_instances
-    valid_attributes = {:first_name => 'Steve', :surname => 'Hayes'}
-    put :create, :employee => valid_attributes
-    response.should redirect_to("http://test.host/employees")
-    Employee.all.should have(1).record
-    Employee.first.attributes.should == valid_attributes.merge(:id => Employee.first.id)
+    post :create, instance_sym => valid_attributes
+    check_index_displayed
+    check_instance_count(1)
+    check_instance_attributes
   end
   
   it "should update instance" do
-    Employee.all.destroy!
-    Employee.make
-    valid_attributes = {:first_name => 'Steve', :surname => 'Hayes'}
-    put :update, :id => Employee.first.id, :employee => valid_attributes
-    response.should redirect_to("http://test.host/employees")
-    Employee.all.should have(1).record
-    Employee.first.attributes.should == valid_attributes.merge(:id => Employee.first.id)
+    leave_one_instance
+    put :update, :id => instance.id, instance_sym => valid_attributes
+    check_index_displayed
+    check_instance_count(1)
+    check_instance_attributes
   end
-  
-  # def update
   
 end
