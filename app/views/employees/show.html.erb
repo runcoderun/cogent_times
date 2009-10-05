@@ -1,5 +1,0 @@
-<% form_for :employee, @employee, :url => employee_path(@employee.id) do |f| %>
-  <%= hidden_field :_method, :put %>
-  <%= render :partial => "employees/form", :locals => { :form => f } %>
-	<p><%= submit_tag "Update" %></p> 
-<% end %>
