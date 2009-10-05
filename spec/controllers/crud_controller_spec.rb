@@ -59,7 +59,7 @@ shared_examples_for 'any crud controller' do
   end
 
   def check_index_displayed
-    response.should redirect_to("http://test.host/employees")
+    response.should redirect_to("http://test.host/#{collection_sym.to_s}")
   end
   
   def check_instance_count(count)
