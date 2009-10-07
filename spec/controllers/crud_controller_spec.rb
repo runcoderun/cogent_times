@@ -1,14 +1,19 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-def model(clazz, attributes)
+def model(clazz, attributes=nil, &attribute_block)
   define_method(:model_class) {return clazz}
-  define_method(:valid_attributes) {return attributes}
+  attr_accessor :valid_attributes
+  define_method(:initialize_attributes) { return self.valid_attributes = attributes || attribute_block.call }
 end
 
 shared_examples_for 'any crud controller' do
   
   integrate_views
 
+  before(:each) do
+    initialize_attributes
+  end
+  
   def collection_sym
     model_class.to_s.pluralize.underscore.to_sym
   end
@@ -18,7 +23,7 @@ shared_examples_for 'any crud controller' do
   end
   
   def clear_instances
-    instances.destroy!
+    instances.destroy
   end
   
   def leave_one_instance

@@ -116,7 +116,10 @@
         self.resource = find_resource
         
         respond_to do |format|
-          if resource.update_attributes(params[resource_name])
+          # active_record
+          # if resource.update_attributes(params[resource_name])
+          # data mapper
+          if resource.update(params[resource_name])
             format.html do
               flash[:notice] = "#{resource_name.humanize} was successfully updated."
               redirect_to resources_url

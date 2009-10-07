@@ -1,0 +1,11 @@
+%dl
+  %dt
+    %label{:for => "work_period_person"}
+      Person:
+  %dd
+    = form.text_field :person_id, :size => '30', :maxlength => '100'
+  %dt
+    %label{:for => "work_period_project"}
+      Project:
+  %dd
+    = form.text_field :project_id, :size => '30', :maxlength => '100'

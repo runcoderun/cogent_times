@@ -22,6 +22,7 @@ Rails::Initializer.run do |config|
   config.gem "do_postgres"
   config.gem "dm-core"
   config.gem "dm-migrations"
+  config.gem "dm-constraints"
   
 
   # Only load the plugins named here, in the order given (default is alphabetical).
