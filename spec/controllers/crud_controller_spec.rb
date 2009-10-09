@@ -2,8 +2,23 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 def model(clazz, attributes=nil, &attribute_block)
   define_method(:model_class) {return clazz}
-  attr_accessor :valid_attributes
-  define_method(:initialize_attributes) { return self.valid_attributes = attributes || attribute_block.call }
+  attr_accessor :valid_model_attributes
+  attr_accessor :valid_parameters
+  define_method(:initialize_attributes) do
+    self.valid_model_attributes = attributes || attribute_block.call 
+    self.valid_parameters = as_parameters(valid_model_attributes)
+  end
+end
+
+class Class
+  def is_date_property?(key)
+    self.properties.each do |property|
+      if property.name == key 
+        return property.type == Date
+      end
+    end
+    return false
+  end
 end
 
 shared_examples_for 'any crud controller' do
@@ -12,6 +27,19 @@ shared_examples_for 'any crud controller' do
 
   before(:each) do
     initialize_attributes
+  end
+  
+  def as_parameters(attributes)
+    parameters = attributes.clone
+    parameters.each do |key, value|
+      if model_class.is_date_property?(key)
+        parameters.delete(key)
+        parameters["#{key}(1i)"] = value.year.to_s
+        parameters["#{key}(2i)"] = value.month.to_s
+        parameters["#{key}(3i)"] = value.day.to_s
+      end
+    end
+    return parameters
   end
   
   def collection_sym
@@ -72,7 +100,7 @@ shared_examples_for 'any crud controller' do
   end
   
   def check_instance_attributes
-    instance.attributes.should == valid_attributes.merge(:id => instance.id)
+    instance.attributes.should == valid_model_attributes.merge(:id => instance.id)
   end
   
   it "should retrieve all instances for index" do
@@ -106,7 +134,7 @@ shared_examples_for 'any crud controller' do
   
   it "should create new instance" do
     clear_instances
-    post :create, instance_sym => valid_attributes
+    post :create, instance_sym => valid_parameters
     check_index_displayed
     check_instance_count(1)
     check_instance_attributes
@@ -114,7 +142,7 @@ shared_examples_for 'any crud controller' do
   
   it "should update instance" do
     leave_one_instance
-    put :update, :id => instance.id, instance_sym => valid_attributes
+    put :update, :id => instance.id, instance_sym => valid_parameters
     check_index_displayed
     check_instance_count(1)
     check_instance_attributes
