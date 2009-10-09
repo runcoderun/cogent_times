@@ -5,20 +5,31 @@ def model(clazz, attributes=nil, &attribute_block)
   attr_accessor :valid_model_attributes
   attr_accessor :valid_parameters
   define_method(:initialize_attributes) do
-    self.valid_model_attributes = attributes || attribute_block.call 
-    self.valid_parameters = as_parameters(valid_model_attributes)
+    object_attributes = attributes || attribute_block.call 
+    self.valid_model_attributes = as_attributes(object_attributes)
+    self.valid_parameters = as_parameters(object_attributes)
   end
 end
 
 class Class
-  def is_date_property?(key)
+  
+  def is_relationship?(name)
+    return !!self.relationships[name]
+  end
+  
+  def is_date_property?(name)
     self.properties.each do |property|
-      if property.name == key 
+      if property.name == name 
         return property.type == Date
       end
     end
     return false
   end
+  
+  def related_class(relationship_name)
+    return self.relationships[relationship_name].parent_model_name.constantize
+  end
+  
 end
 
 shared_examples_for 'any crud controller' do
@@ -29,14 +40,30 @@ shared_examples_for 'any crud controller' do
     initialize_attributes
   end
   
+  def as_attributes(object_attributes)
+    parameters = object_attributes.clone
+    parameters.each do |key, value|
+      if model_class.is_relationship?(key)
+        parameters[:"#{key}_id"] = value.id
+        parameters.delete(key)
+      end
+    end
+    return parameters
+  end
+  
   def as_parameters(attributes)
     parameters = attributes.clone
     parameters.each do |key, value|
       if model_class.is_date_property?(key)
-        parameters.delete(key)
         parameters["#{key}(1i)"] = value.year.to_s
         parameters["#{key}(2i)"] = value.month.to_s
         parameters["#{key}(3i)"] = value.day.to_s
+        parameters.delete(key)
+      end
+      if model_class.is_relationship?(key)
+        parameters[key] = value.id
+        # parameters["#{key}_id"] = value.id
+        # parameters.delete(key)
       end
     end
     return parameters

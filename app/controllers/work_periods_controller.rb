@@ -6,18 +6,41 @@ class WorkPeriodsController < ApplicationController
   alias base_update update
 
   def create
-    reformat_date
-    reformat_hours
+    pp 'Create parameters'
+    pp params
+    reformat_params
+    pp 'Reformatted create parameters'
+    pp params
     base_create
   end
   
   def update
-    reformat_date
-    reformat_hours
+    pp 'Update parameters'
+    pp params
+    reformat_params
+    pp 'Reformatted update parameters'
+    pp params
     base_update
   end
   
   private
+
+  def reformat_params
+    reformat_date
+    reformat_hours
+    reformat_person
+    reformat_project
+  end
+  
+  def reformat_person
+    id = self.params['work_period']['person'].to_i
+    self.params['work_period']['person'] = Person.get(id)
+  end
+  
+  def reformat_project
+    id = self.params['work_period']['project'].to_i
+    self.params['work_period']['project'] = Project.get(id)
+  end
   
   def reformat_date
     make_param_date('work_period', 'date')
@@ -37,10 +60,10 @@ class WorkPeriodsController < ApplicationController
     month_key = "#{property}(2i)"
     day_key = "#{property}(3i)"
     value = Date.civil(params[object][year_key].to_i,params[object][month_key].to_i,params[object][day_key].to_i)
-    params[object].delete(year_key)
-    params[object].delete(month_key)
-    params[object].delete(day_key)
-    params[object][property] = value
+    self.params[object].delete(year_key)
+    self.params[object].delete(month_key)
+    self.params[object].delete(day_key)
+    self.params[object][property] = value
   end
   
 end

@@ -3,12 +3,12 @@
     %label{:for => "work_period_person"}
       Person:
   %dd
-    = collection_select(:work_period, :person_id, Person.all, :id, :full_name, {:prompt => true})
+    = collection_select(:work_period, :person, Person.all, :id, :full_name, {:prompt => true})
   %dt
     %label{:for => "work_period_project"}
       Project:
   %dd
-    = collection_select(:work_period, :project_id, Project.all, :id, :name, {:prompt => true})
+    = collection_select(:work_period, :project, Project.all, :id, :name, {:prompt => true})
   %dt
     %label{:for => "work_period_date"}
       Date:
