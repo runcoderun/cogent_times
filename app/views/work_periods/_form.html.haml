@@ -3,9 +3,19 @@
     %label{:for => "work_period_person"}
       Person:
   %dd
-    = form.text_field :person_id, :size => '30', :maxlength => '100'
+    = collection_select(:work_period, :person_id, Person.all, :id, :full_name, {:prompt => true})
   %dt
     %label{:for => "work_period_project"}
       Project:
   %dd
-    = form.text_field :project_id, :size => '30', :maxlength => '100'
+    = collection_select(:work_period, :project_id, Project.all, :id, :name, {:prompt => true})
+  %dt
+    %label{:for => "work_period_date"}
+      Date:
+  %dd
+  = date_select(:work_period, :date, :default => Date.today )
+  %dt
+    %label{:for => "work_period_hours"}
+      Hours:
+  %dd
+    = form.text_field :hours, :size => '10', :maxlength => 6
