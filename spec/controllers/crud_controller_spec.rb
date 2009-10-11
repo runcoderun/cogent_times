@@ -79,7 +79,7 @@ shared_examples_for 'any crud controller' do
   
   def clear_instances
     # instances.all.each {|each| each.destroy}
-    instances.destroy!
+    instances.destroy! # rely on database constraints
   end
   
   def leave_one_instance
