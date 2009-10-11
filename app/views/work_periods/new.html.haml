@@ -1,3 +1,5 @@
 - form_for :work_period, @work_period, :url => work_periods_path do |f|
   = render :partial => "work_periods/form", :locals => { :form => f }
   %p= submit_tag "Create"
+- @work_period.errors.each do |error|
+  %p= error.to_s

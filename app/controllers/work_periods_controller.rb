@@ -6,20 +6,12 @@ class WorkPeriodsController < ApplicationController
   alias base_update update
 
   def create
-    pp 'Create parameters'
-    pp params
     reformat_params
-    pp 'Reformatted create parameters'
-    pp params
     base_create
   end
   
   def update
-    pp 'Update parameters'
-    pp params
     reformat_params
-    pp 'Reformatted update parameters'
-    pp params
     base_update
   end
   

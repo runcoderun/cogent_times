@@ -2,3 +2,6 @@
   = hidden_field :_method, :put
   = render :partial => "work_periods/form", :locals => { :form => f }
   %p= submit_tag "Update"
+- @work_period.errors.each do |error|
+  %p= error.to_s
+

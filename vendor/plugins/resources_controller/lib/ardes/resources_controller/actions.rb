@@ -44,6 +44,13 @@
     #   redirect_to new_resource_url
     #
     module Actions
+      
+      def print_errors
+        self.resource.errors.each do |e|
+          puts e
+        end
+      end
+      
       # GET /events
       # GET /events.xml
       def index
@@ -103,6 +110,7 @@
             format.js
             format.xml  { render :xml => resource, :status => :created, :location => resource_url }
           else
+            print_errors
             format.html { render :action => "new" }
             format.js   { render :action => "new" }
             format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }
@@ -118,8 +126,8 @@
         respond_to do |format|
           # active_record
           # if resource.update_attributes(params[resource_name])
-          # data mapper
-          if resource.update(params[resource_name])
+          # data mapper 0.9.11
+          if resource.update_attributes(params[resource_name])
             format.html do
               flash[:notice] = "#{resource_name.humanize} was successfully updated."
               redirect_to resources_url
@@ -127,6 +135,7 @@
             format.js
             format.xml  { head :ok }
           else
+            print_errors
             format.html { render :action => "edit" }
             format.js   { render :action => "edit" }
             format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }
