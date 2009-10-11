@@ -78,7 +78,8 @@ shared_examples_for 'any crud controller' do
   end
   
   def clear_instances
-    instances.all.each {|each| each.destroy}
+    # instances.all.each {|each| each.destroy}
+    instances.destroy!
   end
   
   def leave_one_instance
