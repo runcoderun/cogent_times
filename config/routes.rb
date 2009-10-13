@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
 
+  map.resources :timesheets
   map.resources :employees
   map.resources :projects
   map.resources :people
@@ -33,7 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
+  map.root :controller => "home"
 
   # See how all your routes lay out with "rake routes"
 

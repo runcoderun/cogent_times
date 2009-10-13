@@ -1,0 +1,31 @@
+%p= @timesheet.person_name
+
+%table{:border => 1}
+  %tr{:align => 'center'}
+    %th &nbsp;
+    - @timesheet.date_range.each do |date|
+      %th= date.to_s
+    %th Totals
+  - Project.all.each do |project|
+    %tr{:align => 'center'}
+      %td= project.name
+      - @timesheet.date_range.each do |date|
+        %td= @timesheet.work(project, date)
+      %td= @timesheet.project_total(project)
+  %tr{:align => 'center'}
+    %th Totals
+    - @timesheet.date_range.each do |date|
+      %th= @timesheet.date_total(date)
+    %th= @timesheet.total
+  %tr{:align => 'center'}
+    %th &nbsp;
+    - @timesheet.date_range.each do |date|
+      %th= date.to_s
+    %th Totals
+		
+
+%p Dates
+
+%p Row for each project
+
+%p Totals

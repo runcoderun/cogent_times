@@ -1,0 +1,4 @@
+%p
+- form_for :timesheet, :url => {:action => :edit} do |form|
+  = collection_select :person, :id, Person.all, :id, :full_name, {:prompt => 'Select a person'}, {}
+  = submit_tag "Select"

@@ -1,0 +1,4 @@
+= render :partial => 'select_person'
+
+- if @timesheet
+  = render :partial => 'timesheet', :locals => { :timesheet => @timesheet }
