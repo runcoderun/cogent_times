@@ -16,7 +16,7 @@ class Timesheet
   end
   
   def date_range
-    return start_date..(7.days.from_now(start_date))
+    return start_date..(6.days.from_now(start_date))
   end
   
   def work(project, date)
