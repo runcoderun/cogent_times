@@ -10,12 +10,15 @@
     %tr{:align => 'center'}
       %td= project.name
       - @timesheet.date_range.each do |date|
-        %td= @timesheet.work(project, date)
-      %td= @timesheet.project_total(project)
+        %td= text_field_tag("work_#{project.id}_#{date.as_json}", @timesheet.work(project, date), :size => 3)
+        = observe_field("work_#{project.id}_#{date.as_json}", :url => project_work_summary_url(project.id, @timesheet.person_id), :method => :put, :frequency => 0.25, :with => "'hours=' + value + '&date=#{date.as_json}'")
+        = observe_field("work_#{project.id}_#{date.as_json}", :url => project_work_summary_url(project.id, @timesheet.person_id), :method => :get, :frequency => 0.25, :update => "project_total_#{project.id}", :with => "'&start_date=#{@timesheet.date_range.begin.as_json}&end_date=#{@timesheet.date_range.end.as_json}'")
+        = observe_field("work_#{project.id}_#{date.as_json}", :url => person_daily_work_url(@timesheet.person_id), :method => :get, :frequency => 0.25, :update => "date_total_#{date.as_json}", :with => "'date=#{date.as_json}'")
+      %td{:id=>"project_total_#{project.id}"}= @timesheet.project_total(project)
   %tr{:align => 'center'}
     %th Totals
     - @timesheet.date_range.each do |date|
-      %th= @timesheet.date_total(date)
+      %th{:id => "date_total_#{date.as_json}"}= @timesheet.date_total(date)
     %th= @timesheet.total
   %tr{:align => 'center'}
     %th &nbsp;

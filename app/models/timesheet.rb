@@ -11,6 +11,10 @@ class Timesheet
     @person.full_name
   end
   
+  def person_id
+    @person.id
+  end
+  
   def date_range
     return start_date..(7.days.from_now(start_date))
   end
