@@ -1,21 +1,18 @@
 class TimesheetsController < ApplicationController
   
-  # probably need to restructure this so that id is the person id
-  
-  # def index
-  # end
-  
+  def select
+    if Person.get(params['id'])
+      redirect_to edit_timesheet_url(params['id'])
+    else
+      redirect_to timesheets_url
+    end
+  end
+   
   def edit
-    person = Person.get(params['person']['id'])
+    person = Person.get(params['id'])
+    redirect_to :action => :index unless person
     start_date = Date.today
     @timesheet = Timesheet.new(person, start_date)
   end
-   
-  # def update
-  #   respond_to do |format|
-  #     format.html {puts 'Responding to HTML'}
-  #     format.js   { render :text => 'Rex' }
-  #   end
-  # end
    
 end

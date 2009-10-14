@@ -1,4 +1,5 @@
+- id = @timesheet ? @timesheet.person_id : nil
 %p
-- form_for :timesheet, :url => {:action => :edit} do |form|
-  = collection_select :person, :id, Person.all, :id, :full_name, {:prompt => 'Select a person'}, {}
+- form_for :timesheet, :url => {:action => :select} do |form|
+  = select_tag :id, 	(options_for_select({ "Select a person" => nil }, id) + options_from_collection_for_select(Person.all, 'id', 'full_name', id))
   = submit_tag "Select"
