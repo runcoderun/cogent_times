@@ -9,14 +9,12 @@ ActionController::Routing::Routes.draw do |map|
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
 
-  map.resources :timesheets, :member => { :project_total => :get } 
+  map.resources :timesheets, :member => { :project_total => :get, :date_total => :get, :total => :get } 
   
   # move these to a namespace
   map.resources :employees
   map.resources :projects
-  map.resources :people do |person|
-    person.resource :daily_work
-  end
+  map.resources :people
   map.resources :work_periods
 
   # Sample resource route with options:

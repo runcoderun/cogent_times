@@ -16,7 +16,7 @@
 
         = observe_field("work_#{project.id}_#{date.as_json}", :url => project_total_timesheet_url(@timesheet.person_id), :method => :get, :frequency => 0.25, :update => "project_total_#{project.id}", :with => "'project_id=#{project.id}&start_date=#{@timesheet.date_range.begin.as_json}&end_date=#{@timesheet.date_range.end.as_json}'")
 
-        = observe_field("work_#{project.id}_#{date.as_json}", :url => person_daily_work_url(@timesheet.person_id), :method => :get, :frequency => 0.25, :update => "date_total_#{date.as_json}", :with => "'date=#{date.as_json}'")
+        = observe_field("work_#{project.id}_#{date.as_json}", :url => date_total_timesheet_url(@timesheet.person_id), :method => :get, :frequency => 0.25, :update => "date_total_#{date.as_json}", :with => "'date=#{date.as_json}'")
 
       %td{:id=>"project_total_#{project.id}"}= @timesheet.project_total(project)
   %tr{:align => 'center'}

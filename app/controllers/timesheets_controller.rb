@@ -1,43 +1,82 @@
 class TimesheetsController < ApplicationController
   
+  def edit
+    redirect_to :action => :index unless person
+    @timesheet = Timesheet.new(person, start_date)
+  end
+   
+  def update
+    key = { :project_id => project_id, :person_id => person_id, :date => date }
+    period = WorkPeriod.first(key) || WorkPeriod.new(key)
+    period.hours = hours
+    period.save
+    render :nothing => true
+  end
+  
   def select
-    if Person.get(params['id'])
-      redirect_to edit_timesheet_url(params['id'])
+    if person
+      redirect_to edit_timesheet_url(person.id)
     else
       redirect_to timesheets_url
     end
   end
    
-  def edit
-    person = Person.get(params['id'])
-    redirect_to :action => :index unless person
-    start_date = Date.today
-    @timesheet = Timesheet.new(person, start_date)
-  end
-   
-  def update
-    require 'pp'
-    pp params
-    date = params['date'].to_date
-    key = { :project_id => params['project_id'], :person_id => params['id'], :date => date }
-    period = WorkPeriod.first(key) || WorkPeriod.new(key)
-    period.hours = params['hours'].to_f
-    period.save
+  def project_total
+    render_total(project_work_periods)
   end
   
-  def project_total
-    require 'pp'
-    pp params
-    start_date = params['start_date'].to_date
-    end_date = params['end_date'].to_date
-    date_range = start_date..end_date
-    # change this to be a date range
-    periods = WorkPeriod.all(:project_id => params['project_id'], :person_id => params['id']).select {|work| date_range.include?(work.date)}
+  def date_total
+    render_total(date_work_periods)
+  end
+
+  private
+
+  def project_work_periods
+    return WorkPeriod.all(:project_id => project_id, :person_id => person_id).select {|work| date_range.include?(work.date)}
+  end
+  
+  def date_work_periods
+    return WorkPeriod.all(:person_id => person_id, :date => date)
+  end
+  
+  def hours
+    params['hours'].to_f
+  end
+  
+  def date
+    params['date'].to_date
+  end
+  
+  def project_id
+    params['project_id']
+  end
+  
+  def person_id
+    params['id']
+  end  
+  
+  def render_total(periods)
     total_hours = periods.empty? ? 0 : periods.sum(&:hours)
-    pp total_hours
     respond_to do |format|
       format.js   { render :text => total_hours.to_s }
     end
+  end
+  
+  def person
+    @person ||= Person.get(params['id'])
+  end
+  
+  def date_range
+    if !@date_range
+      start_date = params['start_date'].to_date
+      end_date = params['end_date'].to_date
+      @date_range = start_date..end_date
+    end
+    return @date_range
+  end
+  
+  def start_date
+    params['start_date'] ? params['start_date'].to_date : Date.today
   end
   
 end
