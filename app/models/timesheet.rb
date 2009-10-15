@@ -17,7 +17,7 @@ class Timesheet
   end
   
   def work(project, date)
-    return WorkPeriod.first(:person_id => @person.id, :project_id => project.id, :date => date).hours
+    return Timesheet.new(@person, :project => project, :date_range => date..date).total
   end
   
   def date_total(date)
