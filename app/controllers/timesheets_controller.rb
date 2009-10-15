@@ -22,21 +22,29 @@ class TimesheetsController < ApplicationController
   end
    
   def project_total
-    render_total(project_work_periods)
+    render_total(project_work_hours)
   end
   
   def date_total
-    render_total(date_work_periods)
+    render_total(date_work_hours)
+  end
+
+  def total
+    render_total(work_hours)
   end
 
   private
 
-  def project_work_periods
-    return Timesheet.new(person, :project => project, :date_range => start_date..end_date).work_periods
+  def work_hours
+    return Timesheet.new(person, :date_range => start_date..end_date).total
   end
   
-  def date_work_periods
-    return Timesheet.new(person, :date_range => date..date).work_periods
+  def project_work_hours
+    return Timesheet.new(person, :project => project, :date_range => start_date..end_date).total
+  end
+  
+  def date_work_hours
+    return Timesheet.new(person, :date_range => date..date).total
   end
   
   def hours
@@ -63,10 +71,9 @@ class TimesheetsController < ApplicationController
     params['id']
   end  
   
-  def render_total(periods)
-    total_hours = periods.empty? ? 0 : periods.sum(&:hours)
+  def render_total(hours)
     respond_to do |format|
-      format.js   { render :text => total_hours.to_s }
+      format.js   { render :text => hours.to_s }
     end
   end
   
@@ -79,7 +86,7 @@ class TimesheetsController < ApplicationController
   end
 
   def end_date
-    params['end_date'].to_date || 6.days.from_now(start_date)
+    params['end_date'] ? params['end_date'].to_date : 6.days.from_now(start_date)
   end
   
   def start_date

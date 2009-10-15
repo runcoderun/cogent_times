@@ -1,19 +1,11 @@
 class Timesheet
   
-  attr_reader :start_date, :end_date, :date_range
+  attr_reader :date_range
   
   def initialize(person, options={})
-    @project = options[:project]
     @person = person
+    @project = options[:project]
     @date_range = options[:date_range]
-  end
-  
-  def work_periods
-    keys = { :person_id => person_id }
-    keys[:project_id] = @project.id if @project
-    periods = WorkPeriod.all(keys)
-    periods = periods.select {|p| date_range.include?(p.date)} if date_range
-    return periods
   end
   
   def person_name
@@ -25,19 +17,33 @@ class Timesheet
   end
   
   def work(project, date)
-    return 0
+    return WorkPeriod.first(:person_id => @person.id, :project_id => project.id, :date => date).hours
   end
   
   def date_total(date)
-    return 0
+    return Timesheet.new(@person, :date_range => date..date).total
   end
   
   def total
-    return 0
+    work_periods.empty? ? 0 : work_periods.sum(&:hours)  
   end
   
   def project_total(project)
-    return 0
+    return Timesheet.new(@person, :project => project, :date_range => @date_range).total
+  end
+
+  private
+  
+  def work_periods
+    @work_periods ||= get_work_periods
+  end
+  
+  def get_work_periods
+    keys = { :person_id => person_id }
+    keys[:project_id] = @project.id if @project
+    periods = WorkPeriod.all(keys)
+    periods = periods.select {|p| date_range.include?(p.date)} if @date_range
+    return periods
   end
   
 end

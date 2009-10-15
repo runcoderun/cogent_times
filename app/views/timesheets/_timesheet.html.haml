@@ -18,12 +18,14 @@
 
         = observe_field("work_#{project.id}_#{date.as_json}", :url => date_total_timesheet_url(@timesheet.person_id), :method => :get, :frequency => 0.25, :update => "date_total_#{date.as_json}", :with => "'date=#{date.as_json}'")
 
+        = observe_field("work_#{project.id}_#{date.as_json}", :url => total_timesheet_url(@timesheet.person_id), :method => :get, :frequency => 0.25, :update => "total")
+
       %td{:id=>"project_total_#{project.id}"}= @timesheet.project_total(project)
   %tr{:align => 'center'}
     %th Totals
     - @timesheet.date_range.each do |date|
       %th{:id => "date_total_#{date.as_json}"}= @timesheet.date_total(date)
-    %th= @timesheet.total
+    %th{:id => 'total'}= @timesheet.total
   %tr{:align => 'center'}
     %th &nbsp;
     - @timesheet.date_range.each do |date|
