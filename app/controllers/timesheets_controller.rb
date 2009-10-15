@@ -2,7 +2,7 @@ class TimesheetsController < ApplicationController
   
   def edit
     redirect_to :action => :index unless person
-    @timesheet = Timesheet.new(person, :start_date => start_date)
+    @timesheet = Timesheet.new(person, :date_range => start_date..end_date)
   end
    
   def update
@@ -32,11 +32,11 @@ class TimesheetsController < ApplicationController
   private
 
   def project_work_periods
-    return WorkPeriod.all(:project_id => project_id, :person_id => person_id).select {|work| date_range.include?(work.date)}
+    return Timesheet.new(person, :project => project, :date_range => start_date..end_date).work_periods
   end
   
   def date_work_periods
-    return Timesheet.new(person, {:start_date => date, :end_date => date}).work_periods
+    return Timesheet.new(person, :date_range => date..date).work_periods
   end
   
   def hours
@@ -45,6 +45,10 @@ class TimesheetsController < ApplicationController
   
   def date
     params['date'].to_date
+  end
+  
+  def project
+    Project.get(project_id)
   end
   
   def project_id
@@ -60,10 +64,7 @@ class TimesheetsController < ApplicationController
   end  
   
   def render_total(periods)
-    pp 'Rendering totals'
-    pp periods
     total_hours = periods.empty? ? 0 : periods.sum(&:hours)
-    pp "Total hours #{total_hours}"
     respond_to do |format|
       format.js   { render :text => total_hours.to_s }
     end
@@ -74,12 +75,11 @@ class TimesheetsController < ApplicationController
   end
   
   def date_range
-    if !@date_range
-      start_date = params['start_date'].to_date
-      end_date = params['end_date'].to_date
-      @date_range = start_date..end_date
-    end
-    return @date_range
+    @date_range ||= start_date..end_date
+  end
+
+  def end_date
+    params['end_date'].to_date || 6.days.from_now(start_date)
   end
   
   def start_date
