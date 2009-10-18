@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# This hook handles gem dependency installation for projects on Devver.  See
+# http://support.devver.net/faqs/compatibility/gems for more information.
+
+# The 'set -o errexit' command tells Bash to exit if any command
+# exits with a non-zero status.
+# This command is recommended for easier debugging but does
+# mean that the script cannot depend on checking exit status
+# (in the $? variable)
+set -o errexit
+
+# Rails' gems:install task has a chicken/egg problem: the Rakefile won't run
+# unless the Rails gems are already available.  So we need to make sure they are
+# installed BEFORE running 'rake gems:install RAILS_ENV=test'
+rails_env_file="config/environment.rb"
+if [ -e $rails_env_file ]; then
+  rails_version=`grep RAILS_GEM_VERSION $rails_env_file | egrep -o "[0-9]+\.[0-9]+\.[0-9]+"`
+  if [ -n "$rails_version" ]; then
+    echo "Ensuring Rails gems are installed"
+    if [ `gem list -i rails -v $rails_version` = "false" ]; then
+      echo "Installing Rails version $rails_version"
+      gem install -v $rails_version rails --no-ri --no-rdoc
+    fi
+  fi
+fi
+
+# If your Rakefile or config/environment.rb file requires specific gems to
+# load, run:
+#
+# mv .devver/devver_geminstaller.yml.example .devver/devver_geminstaller.yml
+#
+# and declare the required gems in .devver/devver_geminstaller.yml
+default_geminstaller_file=".devver/devver_geminstaller.yml"
+if [ -e $default_geminstaller_file ]; then
+    geminstaller -c $default_geminstaller_file
+fi
+
+# The following command installs gem dependencies specified in a Ruby on Rails
+# environment.rb file
+rake_file="Rakefile"
+if [ -e $rake_file ]; then
+    rake gems:install RAILS_ENV=test
+fi
+
+# If your project is not a Rails project or if you don't use Rails gem
+# dependencies, you may want to comment out the line above and uncomment the
+# following line.  This line will call geminstaller, which looks for a
+# geminstaller.yml or config/geminstaller.yml.  See http://geminstaller.org for
+# more about the geminstaller file format.
+#
+# geminstaller
+

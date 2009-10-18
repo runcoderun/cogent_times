@@ -1,0 +1,18 @@
+#!/bin/sh
+
+################################################################################
+# build
+#
+# This hook is responsible for running a full "build" of the project for the 
+# purpose of Continuus Integration
+#
+################################################################################
+
+# The 'set -o errexit' command tells Bash to exit if any command
+# exits with a non-zero status.
+# This command is recommended for easier debugging but does
+# mean that the script cannot depend on checking exit status
+# (in the $? variable)
+set -o errexit
+
+rake
