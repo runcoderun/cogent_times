@@ -1,4 +1,4 @@
-class TimesheetsController < ApplicationController
+class TimesheetsController < SecureController
   
   def edit
     redirect_to :action => :index unless person

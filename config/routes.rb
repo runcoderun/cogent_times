@@ -17,6 +17,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :people
   map.resources :work_periods
 
+  map.resource :login
+  
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 
