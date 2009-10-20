@@ -24,7 +24,7 @@ Rails::Initializer.run do |config|
   config.gem "dm-migrations"#, :version => '0.9.11'
   config.gem "dm-constraints"#, :version => '0.9.11'
   config.gem "dm-validations"#, :version => '0.9.11'
-  
+  # config.gem "xml-simple"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -47,3 +47,13 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+require 'oauth/consumer'
+require 'oauth/signature/rsa/sha1'
+
+class GData
+end
+
+class GData::GoogleAuthSub
+end
+
