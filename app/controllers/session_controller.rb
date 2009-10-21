@@ -1,20 +1,16 @@
-require 'pp'
 require 'xmlsimple'
 
 class SessionController < ApplicationController
   skip_before_filter :login_required, :only => [:new, :create]
  
   def new
-    session[:dummy] = ''
     consumer = get_consumer
     request_token = consumer.get_request_token( {:oauth_callback => post_authentication_url}, {:scope => "https://www.google.com/m8/feeds/"})
     session[:oauth_secret] = request_token.secret
-    session[:oauth_token] = request_token.token
-    redirect_to request_token.authorize_url# + "&oauth_callback=#{next_url}"
+    redirect_to request_token.authorize_url
   end
  
   def create
-    session[:dummy] = ''
     request_token = OAuth::RequestToken.new(get_consumer, params[:oauth_token], session[:oauth_secret])
     access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     xml = ::XmlSimple.xml_in(access_token.get("https://www.google.com/m8/feeds/contacts/default/full/").body)

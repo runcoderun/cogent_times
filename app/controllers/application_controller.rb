@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   def skip_authentication?
-    true
+    false
   end
   
   def login_required

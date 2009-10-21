@@ -47,13 +47,3 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
-
-require 'oauth/consumer'
-require 'oauth/signature/rsa/sha1'
-
-class GData
-end
-
-class GData::GoogleAuthSub
-end
-
