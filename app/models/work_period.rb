@@ -1,11 +1,10 @@
 class WorkPeriod
    
    include DataMapper::Resource
-   # include DataMapper::Validates
    
    property :id,          Serial
-   property :date,        Date
-   property :hours,       Float
+   property :date,        Date, :nullable => false
+   property :hours,       Float, :nullable => false
    belongs_to :person
    belongs_to :project
    

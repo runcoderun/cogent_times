@@ -7,5 +7,6 @@ class Project
    property :name,  String, :nullable => false
    
    has n, :work_periods, :constraint => :destroy
+   has n, :stories, :constraint => :destroy
    
 end

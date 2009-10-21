@@ -522,6 +522,7 @@ module Ardes#:nodoc:
           names = ["?#{names.first}"] 
         end
 
+        specifications = read_inheritable_attribute(:specifications)
         # ignore first '*' if it has already been specified by :load_enclosing == true
         names.shift if specifications == ['*'] && names.first == '*'
         

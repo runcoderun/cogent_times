@@ -1,10 +1,8 @@
-%p= @timesheet.person_name
-
 %table{:border => 1}
   %tr{:align => 'center'}
     %th &nbsp;
     - @timesheet.date_range.each do |date|
-      %th= date.to_s
+      %th= date.strftime('%a <br>%d %b %y')
     %th Totals
   - Project.all.each do |project|
     %tr{:align => 'center'}
@@ -26,15 +24,3 @@
     - @timesheet.date_range.each do |date|
       %th{:id => "date_total_#{date.as_json}"}= @timesheet.date_total(date)
     %th{:id => 'total'}= @timesheet.total
-  %tr{:align => 'center'}
-    %th &nbsp;
-    - @timesheet.date_range.each do |date|
-      %th= date.to_s
-    %th Totals
-		
-
-%p Dates
-
-%p Row for each project
-
-%p Totals

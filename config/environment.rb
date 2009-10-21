@@ -24,6 +24,7 @@ Rails::Initializer.run do |config|
   config.gem "dm-migrations"#, :version => '0.9.11'
   config.gem "dm-constraints"#, :version => '0.9.11'
   config.gem "dm-validations"#, :version => '0.9.11'
+  config.gem "dm-timestamps"#, :version => '0.9.11'
   # config.gem "xml-simple"
 
   # Only load the plugins named here, in the order given (default is alphabetical).

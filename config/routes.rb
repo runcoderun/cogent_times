@@ -13,7 +13,9 @@ ActionController::Routing::Routes.draw do |map|
   
   # move these to a namespace
   map.resources :employees
-  map.resources :projects
+  map.resources :projects do |project|
+    project.resources :stories
+  end
   map.resources :people
   map.resources :work_periods
   map.resources :users
