@@ -3,7 +3,7 @@
 # Save this as rcov.rake in lib/tasks and use rcov:all =>
 # to get accurate spec/feature coverage data
 
-return if ENV["RAILS_ENV"] == 'production'
+if ENV["RAILS_ENV"] != 'production'
 
 begin
 
@@ -36,4 +36,6 @@ begin
 
 rescue
   puts 'Error loading rcov.rake. This is expected in production when cucumber is not available'
+end
+
 end
