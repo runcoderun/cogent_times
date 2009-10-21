@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < SecureController
   resources_controller_for :users
   
   def create
