@@ -3,10 +3,11 @@
 # Save this as rcov.rake in lib/tasks and use rcov:all =>
 # to get accurate spec/feature coverage data
 
-require 'cucumber/rake/task'
-require 'spec/rake/spectask'
-
 begin
+
+  require 'cucumber/rake/task'
+  require 'spec/rake/spectask'
+
   namespace :rcov do
     Cucumber::Rake::Task.new(:cucumber) do |t|    
       t.rcov = true
@@ -30,6 +31,7 @@ begin
       Rake::Task["rcov:rspec"].invoke
     end
   end
+
 rescue
   puts 'Error loading rcov.rake. This is expected in production when cucumber is not available'
 end
