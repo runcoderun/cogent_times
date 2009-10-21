@@ -1,11 +1,12 @@
 require 'xmlsimple'
+require 'oauth/consumer'
+require 'oauth/signature/rsa/sha1'
 
 class SessionController < ApplicationController
-  skip_before_filter :login_required, :only => [:new, :create]
- 
+  
   def new
     consumer = get_consumer
-    request_token = consumer.get_request_token( {:oauth_callback => post_authentication_url}, {:scope => "https://www.google.com/m8/feeds/"})
+    request_token = consumer.get_request_token( {:oauth_callback => create_session_url}, {:scope => "https://www.google.com/m8/feeds/"})
     session[:oauth_secret] = request_token.secret
     redirect_to request_token.authorize_url
   end
@@ -21,12 +22,27 @@ class SessionController < ApplicationController
     user.oauth_secret =  access_token.secret
     user.save
     session[:user_id] = user.id
-    redirect_to timesheets_url
+    redirect_to post_authentication_url
   end
  
   def delete
     reset_session
-    flash[:notice] = "You have been logged out"
-    redirect_to :action => 'new'
+    redirect_to 'home_index_url'
   end
+  
+  private
+  
+  def get_consumer
+    return OAuth::Consumer.new(oath_consumer_key, oauth_consumer_secret, oauth_consumer_options)
+  end
+
+  def oauth_consumer_options
+    { :site => "https://www.google.com",
+      :request_token_path => "/accounts/OAuthGetRequestToken",
+      :access_token_path => "/accounts/OAuthGetAccessToken",
+      :authorize_path=> "/accounts/OAuthAuthorizeToken",
+      :signature_method => "RSA-SHA1",
+      :private_key_file => "#{RAILS_ROOT}/config/rsakey.pem" }
+  end
+  
 end
