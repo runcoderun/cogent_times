@@ -3,6 +3,9 @@
 # Save this as rcov.rake in lib/tasks and use rcov:all =>
 # to get accurate spec/feature coverage data
 
+puts ENV["RAILS_ENV"]
+return if ENV["RAILS_ENV"] == 'production'
+
 begin
 
   require 'cucumber/rake/task'
