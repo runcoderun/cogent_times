@@ -1,0 +1,6 @@
+- form_for :user, @user, :url => users_path do |f|
+  = hidden_field 'user', 'name', :value => 'unknown'
+  = hidden_field 'user', 'oauth_token', :value => 'not set'
+  = hidden_field 'user', 'oauth_secret', :value => 'not set'
+  = render :partial => "users/form", :locals => { :form => f }
+  %p= submit_tag "Create"

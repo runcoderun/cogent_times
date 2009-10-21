@@ -16,6 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :projects
   map.resources :people
   map.resources :work_periods
+  map.resources :users
 
   map.resources :session, :collection => { :create => :get, :delete => :get }
   
