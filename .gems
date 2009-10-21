@@ -1,2 +1,2 @@
 dm-constraints --version 0.9.10
-mojodna-oauth --version 0.3.6
+mojodna-oauth --version 0.3.6 --source gems.github.com
