@@ -71,7 +71,7 @@ module Ardes#:nodoc:
       
       # finds the resource on a controller using enclosing resources or resource class
       def find_resource(controller)
-        (controller.enclosing_resource ? controller.enclosing_resource.send(source) : klass).find controller.params[key]
+        (controller.enclosing_resource ? controller.enclosing_resource.send(source) : klass).get controller.params[key]
       end
     end
   

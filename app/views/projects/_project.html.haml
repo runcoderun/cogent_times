@@ -1,5 +1,6 @@
 %tr
   %td= project.id
   %td= project.name
+  %td= link_to "Stories", project_stories_url(project.id)
   %td= link_to "Edit", project_url(project.id), :class => "Edit"
   %td= link_to "Delete", project_url(project.id), :method => :delete, :confirm => "Are you sure you want to delete #{project.name}?", :class => "Delete"

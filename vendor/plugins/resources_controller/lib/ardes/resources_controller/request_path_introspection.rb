@@ -50,7 +50,7 @@ module Ardes
       end
       
       def segment_for_key(key)
-        specifications = read_inheritable_attribute(:specifications)
+        specifications = self.class.read_inheritable_attribute(:specifications)
         if respond_to?(:specifications) && spec = specifications.find{|s| s.respond_to?(:key) && s.key == key.to_s}
           spec.segment
         elsif spec = resource_specification_map.values.find{|s| s.key == key.to_s}

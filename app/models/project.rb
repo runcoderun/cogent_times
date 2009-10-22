@@ -2,6 +2,7 @@ class Project
   
    include DataMapper::Resource
    include DataMapper::Constraints
+   include DataMapper::ActiveRecordAdapter
     
    property :id,    Serial
    property :name,  String, :nullable => false

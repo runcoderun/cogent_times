@@ -2,39 +2,18 @@ class WorkPeriodsController < ApplicationController
 
   resources_controller_for :work_periods
   
-  alias base_create create
-  # alias base_show show
-  alias base_update update
-
-  # def show
-  #   require 'pp'
-  #   pp ' in the show method'
-  #   ensure_id_present
-  #   base_show
-  #   # respond_to do |format|
-  #   #   format.html {puts 'Responding to HTML'}
-  #   #   format.js   { render :text => 'Rex' }
-  #   # end
-  # end
-  
   def create
     reformat_params
-    base_create
+    super
   end
   
   def update
     reformat_params
-    base_update
+    super
   end
   
   private
 
-  # def ensure_id_present
-  #   # convert business key to logical key if required
-  #   return if params['id']
-  #   WorkPeriod.first(:person_id => person_id, :project_id => project_id, :date =>date)
-  # end
-  
   def reformat_params
     reformat_date
     reformat_hours

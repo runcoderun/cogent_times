@@ -1,0 +1,11 @@
+%dl
+  %dt
+    %label{:for => "story_project"}
+      Project:
+  %dd
+    = collection_select(:story, :project_id, Project.all, :id, :name, {:prompt => true})
+  %dt
+    %label{:for => "story_name"}
+      Name:
+  %dd
+    = form.text_field :name, :size => '50', :maxlength => '100'

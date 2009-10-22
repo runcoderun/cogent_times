@@ -16,4 +16,8 @@ class Story
      self.name ||= 'name not provided'
    end
    
+   def to_param
+     return id
+   end
+   
 end
