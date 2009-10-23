@@ -90,7 +90,15 @@ class TimesheetsController < SecureController
   end
   
   def start_date
-    params['start_date'] ? params['start_date'].to_date : Date.today
+    params['start_date'] ? params['start_date'].to_date : default_start_date
+  end
+  
+  def default_start_date
+    date = Date.today
+    while date.strftime('%A') != 'Monday'
+      date = date - 1
+    end
+    return date  
   end
   
 end

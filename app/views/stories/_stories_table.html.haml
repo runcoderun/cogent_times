@@ -1,7 +1,9 @@
 %table
  %tr
-  %th Id
-  %th Name
-  %th Entered
-  %th Changed
+  %th{:align => 'center'} Id
+  %th{:align => 'center'} Name
+  %th{:align => 'center'} Status	
+  %th{:align => 'center'} Entered
+  %th{:align => 'center'} Changed
+  %th{:align => 'center'} Completed
  = render :partial => "story", :collection => @stories
