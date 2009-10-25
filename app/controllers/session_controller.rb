@@ -4,6 +4,10 @@ require 'oauth/signature/rsa/sha1'
 
 class SessionController < ApplicationController
   
+  def index
+    redirect_to :controller => 'home' if session[:user_id]
+  end
+  
   def new
     consumer = get_consumer
     request_token = consumer.get_request_token( {:oauth_callback => create_session_url}, {:scope => "https://www.google.com/m8/feeds/"})
