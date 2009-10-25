@@ -1,3 +1,5 @@
+= link_to '<< Previous', edit_timesheet_url(@timesheet.person_id, :start_date => -7.days.from_now(@timesheet.date_range.first))
+= link_to 'Next >>', edit_timesheet_url(@timesheet.person_id, :start_date => 1.days.from_now(@timesheet.date_range.last))
 %table{:border => 1}
   %tr{:align => 'center'}
     %th &nbsp;
