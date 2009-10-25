@@ -26,6 +26,35 @@ class ApplicationController < ActionController::Base
     'UYAvgbsvem0R5ZYaxm7gmmK0'
   end
   
+  def extract_date_select_value(object, property)
+    if !self.params[object][property]
+      year_key = "#{property}(1i)"
+      month_key = "#{property}(2i)"
+      day_key = "#{property}(3i)"
+      value = Date.civil(params[object][year_key].to_i,params[object][month_key].to_i,params[object][day_key].to_i)
+      self.params[object].delete(year_key)
+      self.params[object].delete(month_key)
+      self.params[object].delete(day_key)
+      self.params[object][property] = value
+    end
+    return self.params[object][property]
+  end
+  
+  def extract_select_date_value(prefix)
+    puts self.params[prefix]
+    if self.params[prefix].class != Date
+      puts 'Date components'
+      puts self.params[prefix]
+      puts self.params[prefix].class
+      puts params[prefix]['year']
+      puts params[prefix]['month']
+      puts params[prefix]['day']
+      value = Date.civil(params[prefix]['year'].to_i,params[prefix]['month'].to_i,params[prefix]['day'].to_i)
+      self.params[prefix] = value
+    end
+    return self.params[prefix]
+  end
+  
     # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 

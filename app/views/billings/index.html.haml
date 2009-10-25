@@ -1,0 +1,10 @@
+= render :partial => 'select_start_date'
+- @projects.each do |project|
+  %h3= "#{project.name} Project"
+  - project.people.each do |person|
+    - hours = Timesheet.new(person, :project => project, :date_range => @start_date..@end_date).total
+    - if hours != 0.0
+      %p
+        = person.full_name
+        = hours
+        hours

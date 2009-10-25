@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   # This route can be invoked with purchase_url(:id => product.id)
 
   map.resources :timesheets, :member => { :project_total => :get, :date_total => :get, :total => :get } 
+  map.resources :billings
   
   # move these to a namespace
   map.resources :employees

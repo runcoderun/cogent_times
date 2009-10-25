@@ -42,7 +42,7 @@ class WorkPeriodsController < ApplicationController
   end
   
   def reformat_date
-    make_param_date('work_period', 'date')
+    extract_date_select_value('work_period', 'date')
   end
 
   def reformat_hours
@@ -52,18 +52,6 @@ class WorkPeriodsController < ApplicationController
   def make_param_float(object, property)
     value = params[object][property].to_f
     params[object][property] = value
-  end
-  
-  def make_param_date(object, property)
-    return if params[object][property] # already formatted
-    year_key = "#{property}(1i)"
-    month_key = "#{property}(2i)"
-    day_key = "#{property}(3i)"
-    value = Date.civil(params[object][year_key].to_i,params[object][month_key].to_i,params[object][day_key].to_i)
-    self.params[object].delete(year_key)
-    self.params[object].delete(month_key)
-    self.params[object].delete(day_key)
-    self.params[object][property] = value
   end
   
 end

@@ -1,3 +1,5 @@
+require 'date_extensions'
+
 class TimesheetsController < SecureController
   
   def edit
@@ -94,11 +96,7 @@ class TimesheetsController < SecureController
   end
   
   def default_start_date
-    date = Date.today
-    while date.strftime('%A') != 'Monday'
-      date = date - 1
-    end
-    return date  
+    return Date.today.start_of_week
   end
   
 end
