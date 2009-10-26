@@ -1,0 +1,17 @@
+%p << Previous Next >>
+
+%table{:border => 1}
+  %thead
+    %tr
+      %th Name
+      - @timesheet_check.weeks.each do |week|
+        %th= "ending #{week.end_date.strftime('%a <br>%d %b %y')}"
+  %tbody
+    - Person.all.each do |person|
+      %tr
+        %td= person.full_name
+        - @timesheet_check.weeks.each do |week|
+          %td{:align => 'center'}
+            = "**" if week.incomplete?(person)
+            = week.hours_for(person)
+            = "**" if week.incomplete?(person)

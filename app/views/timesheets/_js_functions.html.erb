@@ -1,0 +1,4 @@
+<script language="javascript">
+sum = function(things) {return things.inject(0, function(sum, next) {return sum + next;})}
+sum_selector = function(selector) { return sum($$(selector).collect(function(e) {return parseFloat($F(e))}))}
+</script>

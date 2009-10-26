@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :timesheets, :member => { :project_total => :get, :date_total => :get, :total => :get } 
   map.resources :billings
+  map.resources :timesheet_checks
   
   # move these to a namespace
   map.resources :employees
