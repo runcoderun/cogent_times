@@ -6,7 +6,7 @@ class SecureController < ApplicationController
     if session[:user_id]
       @user ||= User.get(session[:user_id])
       # @access_token ||= OAuth::AccessToken.new(get_consumer, @user.oauth_token, @user.oauth_secret)
-    elsif skip_authentication?
+    elsif ENV["RAILS_ENV"] == "development"
       @user = User.first
     else
       redirect_to :controller => 'session', :action => 'new'
