@@ -3,8 +3,6 @@ require 'date_extensions'
 class TimesheetsController < SecureController
   
   def edit
-    require 'pp'
-    pp params
     redirect_to :action => :index unless person
     @timesheet = Timesheet.new(person, :date_range => start_date..end_date)
   end
