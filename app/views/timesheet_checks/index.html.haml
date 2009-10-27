@@ -13,5 +13,5 @@
         - @timesheet_check.weeks.each do |week|
           %td{:align => 'center'}
             = "**" if week.incomplete?(person)
-            = week.hours_for(person)
+            = link_to week.hours_for(person).to_s, edit_timesheet_url(person.id, :start_date => week.start_date, :end_date => week.end_date)
             = "**" if week.incomplete?(person)
