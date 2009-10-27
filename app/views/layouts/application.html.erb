@@ -6,8 +6,9 @@
 <body>
 	<h1>Cogent Consulting Timesheet Application</h1>
 	<p>
-	  <%= link_to 'Login', new_session_url unless session[:user_id]%> 
-	  <%= link_to 'Logout', delete_session_url if session[:user_id]%> 
+	  <%= link_to 'Login', new_session_url unless logged_in? %> 
+	  <%= link_to 'Home', home_index_url if logged_in? %> 
+	  <%= link_to 'Logout', delete_session_url if logged_in? %> 
 	</p>
 	<div id="content">
 		<% if flash[:notice] -%>

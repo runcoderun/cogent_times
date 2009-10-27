@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :work_periods
   map.resources :users
 
+  map.resources :home
   map.resources :session, :collection => { :create => :get, :delete => :get }
   
   # Sample resource route with options:
