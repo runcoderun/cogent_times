@@ -24,6 +24,14 @@ module DateExtensions
     return date
   end
   
+  def weekday?
+    ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].include?(self.strftime('%A'))
+  end
+  
+  def weekend?
+    ['Saturday', 'Sunday'].include?(self.strftime('%A'))
+  end
+  
 end
 
 class Date

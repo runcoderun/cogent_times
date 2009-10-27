@@ -5,7 +5,7 @@
     %tr
       %th Name
       - @timesheet_check.weeks.each do |week|
-        %th= "ending #{week.end_date.strftime('%a <br>%d %b %y')}"
+        %th= week.description
   %tbody
     - Person.all.each do |person|
       %tr

@@ -92,7 +92,7 @@ class TimesheetsController < SecureController
   end
   
   def start_date
-    params['start_date'] ? params['start_date'].to_date : default_start_date
+    params['start_date'] ? params['start_date'].to_date : (params['end_date'] ? params['end_date'].to_date - 6 : default_start_date)
   end
   
   def default_start_date
