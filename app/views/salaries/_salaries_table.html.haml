@@ -1,0 +1,7 @@
+%table
+ %tr
+  %th{:align => 'center'} Id
+  %th{:align => 'center'} Person
+  %th{:align => 'center'} Start Date
+  %th{:align => 'center'} Amount
+ = render :partial => "salary", :collection => @salaries

@@ -14,12 +14,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :timesheet_checks
   
   # move these to a namespace
-  map.resources :employees
   map.resources :projects do |project|
     project.resources :stories
   end
-  map.resources :people
+  map.resources :people do |person|
+    person.resources :salaries
+  end
   map.resources :work_periods
+  map.resources :system_settings
   map.resources :users
 
   map.resources :home

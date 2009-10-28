@@ -1,0 +1,7 @@
+%tr
+  %td= salary.id
+  %td= salary.person.full_name
+  %td= salary.start_date.strftime('%Y-%m-%d')
+  %td= salary.amount
+  %td= link_to "Edit", person_salary_url(salary.person.id, salary.id), :class => "Edit"
+  %td= link_to "Delete", person_salary_url(salary.person.id, salary.id), :method => :delete, :confirm => "Are you sure you want to delete #{salary.id}?", :class => "Delete"

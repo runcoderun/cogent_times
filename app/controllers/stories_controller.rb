@@ -2,12 +2,6 @@ class StoriesController < SecureController
   # resources_controller_for :stories
   resources_controller_for :stories, :in => :project
 
-  def new
-    require 'pp'
-    pp params
-    super
-  end
-  
   def create
     reformat_params
     super

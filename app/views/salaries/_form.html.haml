@@ -1,0 +1,16 @@
+%dl
+  %dt
+    %label{:for => "salary_person"}
+      Person:
+  %dd
+    = collection_select(:salary, :person_id, Person.all, :id, :full_name, {:prompt => true})
+  %dt
+    %label{:for => "salary_date"}
+      Start Date:
+  %dd
+  = date_select(:salary, :start_date, :default => Date.today )
+  %dt
+    %label{:for => "salary_amount"}
+      Amount:
+  %dd
+    = form.text_field :amount, :size => '10', :maxlength => 10

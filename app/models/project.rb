@@ -14,8 +14,4 @@ class Project
      return (work_periods.collect &:person).uniq
    end
    
-   # def work_periods_by_person
-   #   work_periods.group_by {|work| work.person}
-   # end
-   
 end

@@ -2,5 +2,8 @@
   %td= person.id
   %td= person.first_name
   %td= person.surname
+  %td= person.email
+  %td= person.salary
   %td= link_to "Edit", person_url(person.id), :class => "Edit"
   %td= link_to "Delete", person_url(person.id), :method => :delete, :confirm => "Are you sure you want to delete #{person.surname}?", :class => "Delete"
+  %td= link_to "Salaries", person_salaries_url(person.id), :class => "Edit"

@@ -10,6 +10,16 @@ class TimesheetCheck
   end
   
   def weeks
+    @weeks ||= constructed_weeks
+  end
+
+  def incomplete?(person)
+    return weeks.any? {|each| each.incomplete?(person)}
+  end
+  
+  private
+  
+  def constructed_weeks
     weeks = []
     week_start = self.start_date
     while week_start < self.end_date

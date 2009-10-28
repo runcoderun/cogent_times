@@ -6,6 +6,7 @@
       %th Name
       - @timesheet_check.weeks.each do |week|
         %th= week.description
+      %th Action
   %tbody
     - Person.all.each do |person|
       %tr
@@ -15,3 +16,4 @@
             = "**" if week.incomplete?(person)
             = link_to week.hours_for(person).to_s, edit_timesheet_url(person.id, :start_date => week.start_date, :end_date => week.end_date)
             = "**" if week.incomplete?(person)
+        %td= link_to 'Notify', 'http://www.google.com' if @timesheet_check.incomplete?(person)

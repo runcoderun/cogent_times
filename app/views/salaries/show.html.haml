@@ -1,0 +1,5 @@
+- @salary.person = @person
+- form_for :salary, @salary, :url => person_salary_path(@person.id) do |f|
+  = hidden_field :_method, :put
+  = render :partial => "salaries/form", :locals => { :form => f }
+  %p= submit_tag "Update"

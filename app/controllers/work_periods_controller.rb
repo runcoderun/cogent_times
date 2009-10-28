@@ -1,4 +1,4 @@
-class WorkPeriodsController < ApplicationController
+class WorkPeriodsController < SecureController
 
   resources_controller_for :work_periods
   
