@@ -63,5 +63,5 @@ ActionMailer::Base.smtp_settings = {
   :domain => "cogent-times.heroku.com",
   :authentication => :plain,
   :user_name => "steve.hayes@cogentconsulting.com.au",
-  :password => "yourpassword"
+  :password => "-----"
 }

@@ -1,3 +1,5 @@
+# require 'smtp_configuration'
+
 class Reminder < ActionMailer::Base
 
   def missing_hours(recipient)
@@ -9,4 +11,5 @@ class Reminder < ActionMailer::Base
 
 end
 
-# Notifier.deliver_missing_hours(david) # sends the email
+# steve = People.find(3)
+# Reminder.deliver_missing_hours(steve)

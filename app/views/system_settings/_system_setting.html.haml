@@ -1,0 +1,6 @@
+%tr
+  %td= system_setting.id
+  %td= system_setting.key
+  %td= system_setting.value
+  %td= link_to "Edit", system_setting_url(system_setting.id), :class => "Edit"
+  %td= link_to "Delete", system_setting_url(system_setting.id), :method => :delete, :confirm => "Are you sure you want to delete #{system_setting.key}?", :class => "Delete"

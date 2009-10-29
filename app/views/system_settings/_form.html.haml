@@ -1,0 +1,11 @@
+%dl
+  %dt
+    %label{:for => "system_setting_key"}
+      Key:
+  %dd
+    = form.text_field :key, :size => '30', :maxlength => '100'
+  %dt
+    %label{:for => "system_setting_value"}
+      Value:
+  %dd
+    = form.text_field :value, :size => '30', :maxlength => '100'
