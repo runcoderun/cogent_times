@@ -7,7 +7,8 @@ class SystemSetting
   property :value, String, :nullable => true
   
   def self.smtp_password
-    SystemSetting.first(:key => 'smtp_password').value  
+    password = SystemSetting.first(:key => 'smtp_password')
+    password ? password.value : nil
   end 
   
   def self.smtp_password=(new_value)
