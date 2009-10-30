@@ -40,12 +40,16 @@ class EmploymentCostsCalculator
     return @oncosts.cost(self.fte_weight)
   end
   
-  def total_cost
+  def weighted_total_cost
     self.weighted_wages_costs + self.oncosts
   end
   
   def daily_cost
-    self.total_cost / self.class.working_days_per_year
+    self.weighted_total_cost / weighted_working_days
+  end
+
+  def weighted_working_days
+    self.class.working_days_per_year * self.fte_weight
   end
   
 end
