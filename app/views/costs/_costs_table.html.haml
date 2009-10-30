@@ -1,13 +1,14 @@
 %table
  %tr
-  %th Id
-  %th First Name
-  %th Salary
-  %th FTE
-  %th Superannuation
-  %th Payroll Tax
-  %th Total Wage Costs
-  %th Weighted Wage Costs
-  %th Oncosts
-  %th Daily Cost
+  %th{:valign=>'bottom'} Id
+  %th{:valign=>'bottom'} First Name
+  %th{:valign=>'bottom'} Salary
+  %th{:valign=>'bottom'} FTE
+  %th{:valign=>'bottom'} Super
+  %th{:valign=>'bottom'} Payroll Tax
+  %th{:valign=>'bottom'} Total<br> Wage Costs
+  %th{:valign=>'bottom'} Weighted<br> Wage Costs
+  %th{:valign=>'bottom'} Oncosts
+  %th{:valign=>'bottom'} Daily<br> Cost
+  %th{:valign=>'bottom'} Average <br>Daily Cost
  = render :partial => "person", :collection => @people, :locals => {:oncosts => oncosts}

@@ -48,6 +48,10 @@ class EmploymentCostsCalculator
     self.weighted_total_cost / weighted_working_days
   end
 
+  def average_daily_cost    
+    self.weighted_total_cost / self.class.working_days_per_year
+  end
+
   def weighted_working_days
     self.class.working_days_per_year * self.fte_weight
   end
