@@ -1,0 +1,5 @@
+- oncosts = OnCostsCalculator.new(120000.00)
+#content
+ .title
+  %h1 Costs
+  = render :partial => "costs_table", :locals => {:oncosts => oncosts}

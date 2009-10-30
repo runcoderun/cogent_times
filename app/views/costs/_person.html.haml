@@ -1,0 +1,12 @@
+- employment_costs = EmploymentCostsCalculator.new(person.salary, person.fte, oncosts)
+%tr
+  %td= person.id
+  %td= person.full_name
+  %td= person.salary
+  %td= person.fte
+  %td= employment_costs.superannuation
+  %td= employment_costs.payroll_tax
+  %td= employment_costs.total_wages_costs
+  %td= employment_costs.weighted_wages_costs
+  %td= employment_costs.oncosts
+  %td= employment_costs.daily_cost

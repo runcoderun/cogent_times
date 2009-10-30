@@ -1,4 +1,4 @@
-# require 'smtp_configuration'
+require 'smtp_configuration'
 
 class Reminder < ActionMailer::Base
 

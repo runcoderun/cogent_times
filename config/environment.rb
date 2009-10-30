@@ -56,12 +56,3 @@ ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.perform_deliveries = true
 ActionMailer::Base.raise_delivery_errors = true
 ActionMailer::Base.default_charset = "utf-8"
-
-ActionMailer::Base.smtp_settings = {
-  :address => "smtp.sendgrid.net",
-  :port => '25',
-  :domain => "cogent-times.heroku.com",
-  :authentication => :plain,
-  :user_name => "steve.hayes@cogentconsulting.com.au",
-  :password => "-----"
-}

@@ -1,0 +1,13 @@
+%table
+ %tr
+  %th Id
+  %th First Name
+  %th Salary
+  %th FTE
+  %th Superannuation
+  %th Payroll Tax
+  %th Total Wage Costs
+  %th Weighted Wage Costs
+  %th Oncosts
+  %th Daily Cost
+ = render :partial => "person", :collection => @people, :locals => {:oncosts => oncosts}
