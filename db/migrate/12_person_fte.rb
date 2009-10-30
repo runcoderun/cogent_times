@@ -1,4 +1,4 @@
-migration 10, :add_person_fte do
+migration 12, :add_person_fte do
     
   up do
     modify_table :people do
