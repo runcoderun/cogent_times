@@ -14,6 +14,10 @@ class EmploymentCostsCalculator
     250
   end
   
+  def self.months_per_year
+    12
+  end
+  
   def initialize(salary, fte_weight, oncosts)
     @salary = salary
     @fte_weight = fte_weight
@@ -50,6 +54,10 @@ class EmploymentCostsCalculator
 
   def average_daily_cost    
     self.weighted_total_cost / self.class.working_days_per_year
+  end
+
+  def average_monthly_cost    
+    self.weighted_total_cost / self.class.months_per_year
   end
 
   def weighted_working_days

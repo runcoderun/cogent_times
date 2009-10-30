@@ -2,13 +2,14 @@
  %tr
   %th{:valign=>'bottom'} Id
   %th{:valign=>'bottom'} First Name
-  %th{:valign=>'bottom'} Salary
-  %th{:valign=>'bottom'} FTE
-  %th{:valign=>'bottom'} Super
-  %th{:valign=>'bottom'} Payroll Tax
-  %th{:valign=>'bottom'} Total<br> Wage Costs
-  %th{:valign=>'bottom'} Weighted<br> Wage Costs
-  %th{:valign=>'bottom'} Oncosts
-  %th{:valign=>'bottom'} Daily<br> Cost
-  %th{:valign=>'bottom'} Average <br>Daily Cost
+  %th{:valign=>'bottom', :align => 'right'} Salary
+  %th{:valign=>'bottom', :align => 'right'} FTE
+  %th{:valign=>'bottom', :align => 'right'} Super
+  %th{:valign=>'bottom', :align => 'right'} Payroll Tax
+  %th{:valign=>'bottom', :align => 'right'} Total<br> Wage Costs
+  %th{:valign=>'bottom', :align => 'right'} Weighted<br> Wage Costs
+  %th{:valign=>'bottom', :align => 'right'} Oncosts
+  %th{:valign=>'bottom', :align => 'right'} Daily<br> Cost
+  %th{:valign=>'bottom', :align => 'right'} Average <br>Daily Cost
+  %th{:valign=>'bottom', :align => 'right'} Average <br>Monthly Cost
  = render :partial => "person", :collection => @people, :locals => {:oncosts => oncosts}
