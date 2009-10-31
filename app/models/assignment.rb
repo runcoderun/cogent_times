@@ -10,4 +10,6 @@ class Assignment
    validates_present :person
    validates_present :project
    
+   validates_is_unique :project_id, :scope => :person_id
+   
 end
