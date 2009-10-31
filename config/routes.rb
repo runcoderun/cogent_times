@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
     person.resources :salaries
   end
   map.resources :work_periods
+  map.resources :assignments
   map.resources :system_settings
   map.resources :users
 

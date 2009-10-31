@@ -49,9 +49,4 @@ class WorkPeriodsController < SecureController
     make_param_float('work_period', 'hours')
   end
   
-  def make_param_float(object, property)
-    value = params[object][property].to_f
-    params[object][property] = value
-  end
-  
 end

@@ -14,4 +14,13 @@ class Project
      return (work_periods.collect &:person).uniq
    end
    
+   def rate_for(person)
+     assignment = Assignment.first(:person_id => person.id, :project_id => self.id)
+     return assignment ? assignment.rate : 0.0
+   end
+   
+   def hourly_rate_for(person)
+     return rate_for(person) / SystemSetting.hours_per_day
+   end
+   
 end

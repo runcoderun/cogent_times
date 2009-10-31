@@ -52,6 +52,10 @@ class EmploymentCostsCalculator
     self.weighted_total_cost / weighted_working_days
   end
 
+  def hourly_cost
+    return daily_cost / SystemSetting.hours_per_day
+  end
+  
   def average_daily_cost    
     self.weighted_total_cost / self.class.working_days_per_year
   end

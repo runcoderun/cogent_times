@@ -1,0 +1,5 @@
+- form_for :assignment, @assignment, :url => assignments_path do |f|
+  = render :partial => "form", :locals => { :form => f }
+  %p= submit_tag "Create"
+- @assignment.errors.each do |error|
+  %p= error.to_s

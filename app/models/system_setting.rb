@@ -6,6 +6,10 @@ class SystemSetting
   property :key,   String, :nullable => false
   property :value, String, :nullable => true
   
+  def self.hours_per_day
+    return 8.0
+  end
+  
   def self.smtp_password
     password = SystemSetting.first(:key => 'smtp_password')
     password ? password.value : nil

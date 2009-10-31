@@ -55,6 +55,11 @@ class ApplicationController < ActionController::Base
     return self.params[prefix]
   end
   
+  def make_param_float(object, property)
+    value = params[object][property].to_f
+    params[object][property] = value
+  end
+  
     # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 

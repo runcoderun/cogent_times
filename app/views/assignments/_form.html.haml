@@ -1,0 +1,16 @@
+%dl
+  %dt
+    %label{:for => "assignment_person"}
+      Person:
+  %dd
+    = collection_select(:assignment, :person_id, Person.all, :id, :full_name, {:prompt => true})
+  %dt
+    %label{:for => "assignment_project"}
+      Project:
+  %dd
+    = collection_select(:assignment, :project_id, Project.all, :id, :name, {:prompt => true})
+  %dt
+    %label{:for => "assignment_rate"}
+      Rate:
+  %dd
+    = form.text_field :rate, :size => '10', :maxlength => 6

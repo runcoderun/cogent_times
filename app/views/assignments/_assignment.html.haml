@@ -1,0 +1,7 @@
+%tr
+  %td= assignment.id
+  %td= assignment.person.surname
+  %td= assignment.project.name
+  %td= currencify(assignment.rate)
+  %td= link_to "Edit", assignment_url(assignment.id), :class => "Edit"
+  %td= link_to "Delete", assignment_url(assignment.id), :method => :delete, :confirm => "Are you sure you want to delete #{assignment.id}?", :class => "Delete"

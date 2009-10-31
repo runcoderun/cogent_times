@@ -1,0 +1,7 @@
+- form_for :assignment, @assignment, :url => assignment_path(@assignment.id) do |f|
+  = hidden_field :_method, :put
+  = render :partial => "form", :locals => { :form => f }
+  %p= submit_tag "Update"
+- @assignment.errors.each do |error|
+  %p= error.to_s
+

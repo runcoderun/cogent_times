@@ -28,6 +28,18 @@ class Timesheet
     work_periods.empty? ? 0 : work_periods.sum(&:hours)  
   end
   
+  def billing
+    work_periods.empty? ? 0 : work_periods.sum(&:billing)  
+  end
+  
+  def costs(oncosts)
+    work_periods.empty? ? 0 : work_periods.sum {|work| work.costs(oncosts)}
+  end
+  
+  def margin(oncosts)
+    return self.billing - self.costs(oncosts)
+  end
+  
   def project_total(project)
     return Timesheet.new(@person, :project => project, :date_range => @date_range).total
   end

@@ -10,5 +10,14 @@ class WorkPeriod
    
    validates_present :person
    validates_present :project
+
+   def billing
+     return self.hours * project.hourly_rate_for(person)
+   end
+   
+   def costs(oncosts)
+     employment_costs = EmploymentCostsCalculator.new(person.salary, person.fte, oncosts)
+     return self.hours * employment_costs.hourly_cost
+   end
    
 end
