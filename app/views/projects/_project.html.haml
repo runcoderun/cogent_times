@@ -1,6 +1,7 @@
 %tr
   %td= project.id
   %td= project.name
+  %td= project.category_name
   %td{:align => 'center'}= project.use_fixed_daily_rate
   %td= project.fixed_daily_rate
   %td= link_to "Stories", project_stories_url(project.id)

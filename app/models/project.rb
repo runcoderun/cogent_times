@@ -8,10 +8,15 @@ class Project
   property :name,  String, :nullable => false
   property :fixed_daily_rate, Float
   property :use_fixed_daily_rate, Boolean, :nullable => false, :default => false
+
+  belongs_to :project_category
+  validates_present :project_category
    
   has n, :work_periods, :constraint => :destroy
   has n, :stories, :constraint => :destroy
-   
+  
+  delegate :use_in_reports, :to => :project_category
+  
   def people
     return (work_periods.collect &:person).uniq
   end
@@ -33,4 +38,8 @@ class Project
     end
   end
    
+  def category_name
+    project_category.name
+  end
+  
 end

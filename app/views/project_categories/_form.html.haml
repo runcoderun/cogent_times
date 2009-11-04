@@ -1,0 +1,11 @@
+%dl
+  %dt
+    %label{:for => "project_category_name"}
+      Name:
+  %dd
+    = form.text_field :name, :size => '30', :maxlength => '100'
+  %dt
+    %label{:for => "project_category_use_in_reports"}
+      Use In Reports:
+  %dd
+    = form.check_box(:use_in_reports)

@@ -1,0 +1,11 @@
+= render :partial => 'billings/select_start_date'
+%table
+  %tr
+    %th Category
+    %th Hours
+    %th Percent
+    - ProjectCategory.reportable.each do |category|
+      %tr
+        %td= category.name
+        %td= hours = (@billings.timesheets_for_category(category).sum &:hours)
+        %td= number_to_percentage(hours / @billings.reportable_hours * 100.0,:precision => 2)

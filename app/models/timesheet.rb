@@ -28,6 +28,8 @@ class Timesheet
     work_periods.empty? ? 0 : work_periods.sum(&:hours)  
   end
   
+  alias :hours :total
+
   def billing
     work_periods.empty? ? 0 : work_periods.sum(&:billing)  
   end

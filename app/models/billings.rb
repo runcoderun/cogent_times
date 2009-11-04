@@ -17,6 +17,18 @@ class Billings
     @timesheets_by_project[project]
   end
   
+  def timesheets_for_category(project_category)
+    project_category.projects.collect {|project| self.timesheets_for(project) || []}.flatten
+  end
+  
+  def hours
+    @hours ||= timesheets.sum &:hours
+  end
+  
+  def reportable_hours
+    timesheets.select{|timesheet| timesheet.project.use_in_reports}.sum &:hours
+  end
+  
   def billing
     timesheets.sum &:billing
   end
@@ -46,15 +58,13 @@ end
 
 class BillingTimesheet
   
+  attr_reader :project, :person
+  
   def initialize(project, person, date_range, oncosts)
     @project = project
     @person = person
     @timesheet = Timesheet.new(person, :project => project, :date_range => date_range)
     @oncosts = oncosts
-  end
-  
-  def person
-    @person
   end
   
   def total
@@ -63,6 +73,10 @@ class BillingTimesheet
   
   def billing
     @timesheet.billing
+  end
+  
+  def hours
+    @timesheet.hours
   end
   
   def costs

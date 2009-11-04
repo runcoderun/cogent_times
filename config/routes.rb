@@ -11,10 +11,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :timesheets, :member => { :project_total => :get, :date_total => :get, :total => :get } 
   map.resources :billings
+  map.resources :utilisations, :collection => {:select_date_range => :post}
   map.resources :timesheet_checks, :member => { :reminder => :post }
   map.resources :costs
   
   # move these to a namespace
+  map.resources :project_categories
   map.resources :projects do |project|
     project.resources :stories
   end

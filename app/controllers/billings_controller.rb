@@ -3,11 +3,11 @@ require 'date_extensions'
 class BillingsController < SecureController
   
   def index
-    @projects = Project.all
-    @start_date = params['start_date'] ? params['start_date'].to_date : default_start_date
-    @end_date = params['end_date'] ? params['end_date'].to_date : default_end_date
-    @oncosts = OnCostsCalculator.new(120000.00)
-    @billings = Billings.new(Project.all, 120000.00, @start_date, @end_date)
+    projects = Project.all
+    start_date = params['start_date'] ? params['start_date'].to_date : default_start_date
+    end_date = params['end_date'] ? params['end_date'].to_date : default_end_date
+    # @oncosts = OnCostsCalculator.new(120000.00)
+    @billings = Billings.new(Project.all, 120000.00, start_date, end_date)
   end
   
   def select_date_range

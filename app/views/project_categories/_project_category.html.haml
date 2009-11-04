@@ -1,0 +1,6 @@
+%tr
+  %td= project_category.id
+  %td= project_category.name
+  %td{:align => 'center'}= project_category.use_in_reports
+  %td= link_to "Edit", project_category_url(project_category.id), :class => "Edit"
+  %td= link_to "Delete", project_category_url(project_category.id), :method => :delete, :confirm => "Are you sure you want to delete #{project_category.name}?", :class => "Delete"
