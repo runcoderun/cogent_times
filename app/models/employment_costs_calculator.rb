@@ -2,21 +2,45 @@ class EmploymentCostsCalculator
   
   attr_reader :salary, :fte_weight
   
-  def self.superannuation_rate
-    0.09
+  #############
+  # constants
+  #############
+  
+  def self.public_holidays_per_year
+    11
   end
   
-  def self.payroll_tax_rate
-    0.055
+  def self.annual_leave_days_per_year
+    20
   end
   
-  def self.working_days_per_year
+  def self.sick_leave_days_per_year
+    10
+  end
+  
+  def self.weekdays_per_year
     250
   end
   
-  def self.months_per_year
+  def self.working_days_per_year
+    self.weekdays_per_year - self.public_holidays_per_year - self.annual_leave_days_per_year - self.sick_leave_days_per_year
+  end
+  
+  def superannuation_rate
+    0.09
+  end
+  
+  def payroll_tax_rate
+    0.055
+  end
+  
+  def months_per_year
     12
   end
+  
+  ###################
+  # end of constants
+  ###################
   
   def initialize(salary, fte_weight, oncosts)
     @salary = salary
@@ -25,11 +49,11 @@ class EmploymentCostsCalculator
   end
   
   def superannuation
-    self.salary * self.class.superannuation_rate
+    self.salary * self.superannuation_rate
   end
   
   def payroll_tax
-    (self.salary + self.superannuation) * self.class.payroll_tax_rate
+    (self.salary + self.superannuation) * self.payroll_tax_rate
   end
   
   def total_wages_costs
@@ -56,12 +80,8 @@ class EmploymentCostsCalculator
     return daily_cost / SystemSetting.hours_per_day
   end
   
-  def average_daily_cost    
-    self.weighted_total_cost / self.class.working_days_per_year
-  end
-
   def average_monthly_cost    
-    self.weighted_total_cost / self.class.months_per_year
+    self.weighted_total_cost / self.months_per_year
   end
 
   def weighted_working_days
