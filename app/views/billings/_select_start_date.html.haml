@@ -1,8 +1,8 @@
 %p
 - form_for :billings, :url => {:action => :select_date_range} do |form|	
   Start Date: 
-  = select_date(@start_date || Date.today, :prefix => 'start_date')
+  = select_date(@billings.start_date || Date.today, :prefix => 'start_date')
   %br
   End Date: 
-  = select_date(@end_date || Date.today, :prefix => 'end_date')
+  = select_date(@billings.end_date || Date.today, :prefix => 'end_date')
   = submit_tag "Select"

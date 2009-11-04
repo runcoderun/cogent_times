@@ -1,5 +1,7 @@
 class Billings
   
+  attr_reader :start_date, :end_date
+  
   def initialize(projects, annual_oncosts, start_date, end_date)
     @projects = projects
     @oncosts = OnCostsCalculator.new(annual_oncosts)
