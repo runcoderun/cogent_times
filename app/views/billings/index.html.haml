@@ -1,5 +1,5 @@
 = render :partial => 'select_start_date'
-- @projects.each do |project|
+- @billings.projects.each do |project|
   %h3= "#{project.name} Project"
   %table
     %tr
@@ -9,14 +9,21 @@
       %th Billable
       %th Costs
       %th Margin
-    - project.people.each do |person|
-    - timesheet = Timesheet.new(person, :project => project, :date_range => @start_date..@end_date)
-    - hours = timesheet.total
-      - if hours != 0.0
-        %tr
-          %td= person.full_name
-          %td= "#{hours} hours"
-          %td= "@ #{currencify(project.rate_for(person))}"
-          %td= billing = currencify(timesheet.billing)
-          %td= currencify(timesheet.costs(@oncosts))
-          %td= currencify(timesheet.margin(@oncosts))
+    - @billings.timesheets_for(project).each do |timesheet|
+      %tr
+        %td= timesheet.person.full_name
+        %td= "#{timesheet.total} hours"
+        %td= "@ #{currencify(timesheet.rate)}"
+        %td= currencify(timesheet.billing)
+        %td= currencify(timesheet.costs)
+        %td= currencify(timesheet.margin)
+%h2 Summary
+%table
+  %tr
+    %th Billable
+    %th Costs
+    %th Margin
+  %tr
+    %td= currencify(@billings.billing)
+    %td= currencify(@billings.costs)
+    %td= currencify(@billings.margin)

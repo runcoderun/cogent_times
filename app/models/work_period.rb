@@ -16,8 +16,7 @@ class WorkPeriod
    end
    
    def costs(oncosts)
-     employment_costs = EmploymentCostsCalculator.new(person.salary, person.fte, oncosts)
-     return self.hours * employment_costs.hourly_cost
+     return self.hours * project.hourly_cost(person, oncosts)
    end
    
 end
