@@ -4,3 +4,13 @@
       Name:
   %dd
     = form.text_field :name, :size => '30', :maxlength => '100'
+  %dt
+    %label{:for => "project_use_fixed_daily_rate"}
+      Use Fixed Rate:
+  %dd
+    = form.check_box(:use_fixed_daily_rate)
+  %dt
+    %label{:for => "project_fixed_daily_rate"}
+      Fixed Rate:
+  %dd
+    = form.text_field :fixed_daily_rate, :size => '30', :maxlength => '100'

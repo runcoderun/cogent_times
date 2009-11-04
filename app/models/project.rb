@@ -6,6 +6,8 @@ class Project
     
    property :id,    Serial
    property :name,  String, :nullable => false
+   property :fixed_daily_rate, Float
+   property :use_fixed_daily_rate, Boolean, :nullable => false, :default => false
    
    has n, :work_periods, :constraint => :destroy
    has n, :stories, :constraint => :destroy
