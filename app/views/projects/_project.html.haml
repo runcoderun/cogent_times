@@ -6,7 +6,9 @@
   %td{:align => 'center'}= project.use_fixed_daily_rate
   %td= project.fixed_daily_rate
   %td{:align => 'center'}= currencify(project.labour_costs)
+  %td{:align => 'center'}= currencify(project.expenses_amount)
   %td{:align => 'center'}= currencify(project.cost_to_date)
+  %td= link_to "Expenses", project_expenses_url(project.id)
   %td= link_to "Stories", project_stories_url(project.id)
   %td= link_to "Edit", project_url(project.id), :class => "Edit"
   %td= link_to "Delete", project_url(project.id), :method => :delete, :confirm => "Are you sure you want to delete #{project.name}?", :class => "Delete"

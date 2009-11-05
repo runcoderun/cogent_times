@@ -1,0 +1,21 @@
+%dl
+  %dt
+    %label{:for => "expense_project"}
+      Project:
+  %dd
+    = collection_select(:expense, :project_id, Project.all, :id, :name, {:prompt => true})
+  %dt
+    %label{:for => "expense_date"}
+      Date:
+  %dd
+  = date_select(:expense, :date, :default => Date.today )
+  %dt
+    %label{:for => "expense_amount"}
+      Amount:
+  %dd
+    = form.text_field :amount, :size => '10', :maxlength => 10
+  %dt
+    %label{:for => "expense_notes"}
+      Notes:
+  %dd
+    = form.text_field :notes, :size => '50', :maxlength => '100'

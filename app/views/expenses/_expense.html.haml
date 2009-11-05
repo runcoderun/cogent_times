@@ -1,0 +1,7 @@
+%tr
+  %td= expense.id
+  %td= expense.date.strftime('%Y-%m-%d')
+  %td= currencify(expense.amount)
+  %td= expense.notes
+  %td= link_to "Edit", project_expense_url(expense.project.id, expense.id), :class => "Edit"
+  %td= link_to "Delete", project_expense_url(expense.project.id, expense.id), :method => :delete, :confirm => "Are you sure you want to delete #{expense.id}?", :class => "Delete"

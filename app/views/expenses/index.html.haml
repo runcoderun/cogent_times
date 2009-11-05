@@ -1,0 +1,6 @@
+#content
+ .title
+  %h1= "Expenses for #{@project.name}"
+  = render :partial => "expenses_table"
+  %p
+   = link_to 'Create', new_project_expense_url

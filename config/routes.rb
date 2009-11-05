@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :project_categories
   map.resources :projects do |project|
     project.resources :stories
+    project.resources :expenses
   end
   map.resources :people do |person|
     person.resources :salaries

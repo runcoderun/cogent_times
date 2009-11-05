@@ -15,6 +15,7 @@ class Project
    
   has n, :work_periods, :constraint => :destroy
   has n, :stories, :constraint => :destroy
+  has n, :expenses, :constraint => :destroy
   
   delegate :use_in_reports, :to => :project_category
   
@@ -47,8 +48,12 @@ class Project
     self.work_periods.sum &:costs
   end
   
+  def expenses_amount
+    self.expenses.sum &:amount
+  end
+  
   def cost_to_date
-    return self.starting_cost + self.labour_costs
+    return self.starting_cost + self.labour_costs + self.expenses_amount
   end
   
 end

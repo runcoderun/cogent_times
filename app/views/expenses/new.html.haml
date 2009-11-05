@@ -1,0 +1,4 @@
+- @expense.project = @project
+- form_for :expense, @expense, :url => project_expenses_path(@project.id) do |f|
+  = render :partial => "form", :locals => { :form => f }
+  %p= submit_tag "Create"
