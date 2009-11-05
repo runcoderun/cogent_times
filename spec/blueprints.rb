@@ -1,8 +1,7 @@
 Sham.name  { Faker::Name.name }
 
-Employee.blueprint do
-  first_name  { Sham.name }
-  surname     { Sham.name }
+ProjectCategory.blueprint do
+  name { Sham.name }
 end
 
 Person.blueprint do
@@ -12,6 +11,7 @@ end
 
 Project.blueprint do
   name  { Sham.name }
+  project_category { ProjectCategory.make }
 end
 
 WorkPeriod.blueprint do

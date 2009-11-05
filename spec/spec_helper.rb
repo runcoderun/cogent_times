@@ -14,6 +14,12 @@ require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
+module Authenticated
+  def skip_authentication?
+    true
+  end
+end
+  
 Spec::Runner.configure do |config|
   
   config.before(:all)    { Sham.reset(:before_all)  }

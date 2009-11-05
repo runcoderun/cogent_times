@@ -5,6 +5,15 @@
   %td= person.email
   %td= person.salary
   %td= person.fte
+  %td{:align => 'center'}= person.starting_annual_leave_hours / SystemSetting.hours_per_day
+  %td{:align => 'center'}= 0.0
+  %td{:align => 'center'}= 0.0
+  %td{:align => 'center'}= person.annual_leave_taken / SystemSetting.hours_per_day
+  %td{:align => 'center'}= 0.0
+  %td{:align => 'center'}= person.starting_sick_leave_hours / SystemSetting.hours_per_day
+  %td{:align => 'center'}= 0.0
+  %td{:align => 'center'}= person.sick_leave_taken / SystemSetting.hours_per_day
+  %td{:align => 'center'}= 0.0
   %td= link_to "Edit", person_url(person.id), :class => "Edit"
   %td= link_to "Delete", person_url(person.id), :method => :delete, :confirm => "Are you sure you want to delete #{person.surname}?", :class => "Delete"
   %td= link_to "Salaries", person_salaries_url(person.id), :class => "Edit"

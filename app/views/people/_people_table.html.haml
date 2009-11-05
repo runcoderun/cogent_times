@@ -1,9 +1,18 @@
 %table
  %tr
-  %th Id
-  %th First Name
-  %th Surname 
-  %th Email
-  %th Salary
-  %th FTE
+  %th{:valign=>'bottom'} Id
+  %th{:valign=>'bottom'} First Name
+  %th{:valign=>'bottom'} Surname 
+  %th{:valign=>'bottom'} Email
+  %th{:valign=>'bottom'} Salary
+  %th{:valign=>'bottom'} FTE
+  %th{:valign=>'bottom'} Starting <br>Annual Leave
+  %th{:valign=>'bottom'} Accrued <br>Annual Leave
+  %th{:valign=>'bottom'} Leave <br>In Lieu
+  %th{:valign=>'bottom'} Taken <br>Annual Leave
+  %th{:valign=>'bottom'} Remaining <br>Annual Leave
+  %th{:valign=>'bottom'} Starting <br>Sick Leave
+  %th{:valign=>'bottom'} Accrued <br>Sick Leave
+  %th{:valign=>'bottom'} Taken <br>Sick Leave
+  %th{:valign=>'bottom'} Remaining <br>Sick Leave
  = render :partial => "person", :collection => @people

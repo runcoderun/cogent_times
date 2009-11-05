@@ -3,7 +3,11 @@ require File.expand_path(File.dirname(__FILE__) + '/crud_controller_spec')
 
 describe ProjectsController do
 
-  model Project, {:name => 'A Test Project'}
+  before(:each) do
+    @controller.extend Authenticated
+  end
+  
+  model(Project) {{:name => 'A Test Project', :fixed_daily_rate=>0.0, :use_fixed_daily_rate=>false, :starting_cost=>0.0, :project_category_id => ProjectCategory.make.id}}
 
   it_should_behave_like "any crud controller"
   

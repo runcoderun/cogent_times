@@ -6,18 +6,26 @@ class Project
     
   property :id,    Serial
   property :name,  String, :nullable => false
-  property :fixed_daily_rate, Float
+  property :fixed_daily_rate, Float, :default => 0.0
   property :use_fixed_daily_rate, Boolean, :nullable => false, :default => false
-  property :starting_cost, Float, :nullable => false
+  property :starting_cost, Float, :nullable => false, :default => 0.0
   
   belongs_to :project_category
   validates_present :project_category
    
-  has n, :work_periods, :constraint => :destroy
+  has n, :work_periods, :constraint => :protect
   has n, :stories, :constraint => :destroy
   has n, :expenses, :constraint => :destroy
   
   delegate :use_in_reports, :to => :project_category
+
+  def self.annual_leave
+    Project.first(:name => 'Annual Leave')
+  end
+  
+  def self.sick_leave
+    Project.first(:name => 'Sick Leave')
+  end
   
   def people
     return (work_periods.collect &:person).uniq

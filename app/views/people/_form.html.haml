@@ -19,3 +19,13 @@
       FTE:
   %dd
     = form.text_field :fte, :size => '30', :maxlength => '100'
+  %dt
+    %label{:for => "person_starting_annual_leave_hours"}
+      Starting Annual Leave Hours:
+  %dd
+    = form.text_field :starting_annual_leave_hours, :size => '30', :maxlength => '100'
+  %dt
+    %label{:for => "person_starting_sick_leave_hours"}
+      Starting Sick Leave Hours:
+  %dd
+    = form.text_field :starting_sick_leave_hours, :size => '30', :maxlength => '100'
