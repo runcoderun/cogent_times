@@ -2,9 +2,8 @@ class Billings
   
   attr_reader :start_date, :end_date
   
-  def initialize(projects, annual_oncosts, start_date, end_date)
+  def initialize(projects, start_date, end_date)
     @projects = projects
-    @oncosts = OnCostsCalculator.new(annual_oncosts)
     @start_date = start_date
     @end_date = end_date
     @timesheets_by_project = {}
@@ -47,7 +46,7 @@ class Billings
   
   def initialize_timesheets
     @projects.each do |project|
-      timesheets = project.people.sort_by{|person| person.full_name}.collect {|person| BillingTimesheet.new(project, person, @start_date..@end_date, @oncosts)}.reject {|timesheet| timesheet.total == 0}
+      timesheets = project.people.sort_by{|person| person.full_name}.collect {|person| BillingTimesheet.new(project, person, @start_date..@end_date)}.reject {|timesheet| timesheet.total == 0}
       @timesheets_by_project[project] = timesheets unless timesheets.empty?
     end
   end
@@ -62,11 +61,10 @@ class BillingTimesheet
   
   attr_reader :project, :person
   
-  def initialize(project, person, date_range, oncosts)
+  def initialize(project, person, date_range)
     @project = project
     @person = person
     @timesheet = Timesheet.new(person, :project => project, :date_range => date_range)
-    @oncosts = oncosts
   end
   
   def total
@@ -82,11 +80,11 @@ class BillingTimesheet
   end
   
   def costs
-    @timesheet.costs(@oncosts)
+    @timesheet.costs
   end
   
   def margin
-    @timesheet.margin(@oncosts)
+    @timesheet.margin
   end
   
   def rate

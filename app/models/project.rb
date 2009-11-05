@@ -8,7 +8,8 @@ class Project
   property :name,  String, :nullable => false
   property :fixed_daily_rate, Float
   property :use_fixed_daily_rate, Boolean, :nullable => false, :default => false
-
+  property :starting_cost, Float, :nullable => false
+  
   belongs_to :project_category
   validates_present :project_category
    
@@ -40,6 +41,14 @@ class Project
    
   def category_name
     project_category.name
+  end
+  
+  def labour_costs
+    self.work_periods.sum &:costs
+  end
+  
+  def cost_to_date
+    return self.starting_cost + self.labour_costs
   end
   
 end

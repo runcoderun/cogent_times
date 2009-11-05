@@ -3,10 +3,7 @@ class SalariesController < SecureController
   resources_controller_for :salaries, :in => :person
 
   def create
-    require 'pp'
-    pp params
     reformat_params
-    pp params
     super
   end
   

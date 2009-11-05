@@ -15,8 +15,8 @@ class WorkPeriod
      return self.hours * project.hourly_rate_for(person)
    end
    
-   def costs(oncosts)
-     return self.hours * project.hourly_cost(person, oncosts)
+   def costs
+     return self.hours * project.hourly_cost(person, OnCostsCalculator.new(Oncost.amount_on(self.date)))
    end
    
 end

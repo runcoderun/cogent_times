@@ -1,0 +1,6 @@
+%tr
+  %td= oncost.id
+  %td= oncost.effective_date.strftime('%Y-%m-%d')
+  %td= oncost.amount
+  %td= link_to "Edit", oncost_url(oncost.id), :class => "Edit"
+  %td= link_to "Delete", oncost_url(oncost.id), :method => :delete, :confirm => "Are you sure you want to delete #{oncost.id}?", :class => "Delete"

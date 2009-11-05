@@ -34,12 +34,12 @@ class Timesheet
     work_periods.empty? ? 0 : work_periods.sum(&:billing)  
   end
   
-  def costs(oncosts)
-    work_periods.empty? ? 0 : work_periods.sum {|work| work.costs(oncosts)}
+  def costs
+    work_periods.empty? ? 0 : work_periods.sum {|work| work.costs}
   end
   
-  def margin(oncosts)
-    return self.billing - self.costs(oncosts)
+  def margin
+    return self.billing - self.costs
   end
   
   def project_total(project)

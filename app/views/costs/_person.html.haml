@@ -1,4 +1,4 @@
-- employment_costs = EmploymentCostsCalculator.new(person.salary, person.fte, oncosts)
+- employment_costs = EmploymentCostsCalculator.new(person.salary, person.fte, OnCostsCalculator.new(Oncost.amount_on(Date.today)))
 %tr
   %td= person.id
   %td= person.full_name

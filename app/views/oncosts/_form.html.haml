@@ -1,0 +1,11 @@
+%dl
+  %dt
+    %label{:for => "oncost_effective_date"}
+      Effective Date:
+  %dd
+  = date_select(:oncost, :effective_date, :default => Date.today )
+  %dt
+    %label{:for => "oncost_amount"}
+      Amount:
+  %dd
+    = form.text_field :amount, :size => '10', :maxlength => 10
