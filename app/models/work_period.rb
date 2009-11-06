@@ -11,6 +11,10 @@ class WorkPeriod
    validates_present :person
    validates_present :project
 
+   def self.cleanup
+     self.all(:hours => 0.0).destroy!
+   end
+   
    def billing
      return self.hours * project.hourly_rate_for(person)
    end

@@ -12,6 +12,11 @@ class WorkPeriodsController < SecureController
     super
   end
   
+  def cleanup
+    WorkPeriod.cleanup
+    redirect_to :controller => :home
+  end
+  
   private
 
   def reformat_params
