@@ -5,6 +5,7 @@
     %tr
       %th Name
       %th Hours
+      %th Days
       %th Daily Rate
       %th Billable
       %th Costs
@@ -13,6 +14,7 @@
       %tr
         %td= timesheet.person.full_name
         %td= "#{timesheet.total} hours"
+        %td= "#{timesheet.total / SystemSetting.hours_per_day} days"
         %td= "@ #{currencify(timesheet.rate)}"
         %td= currencify(timesheet.billing)
         %td= currencify(timesheet.costs)
