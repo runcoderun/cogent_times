@@ -3,11 +3,14 @@
     Here's the deal:
     %ul
       %li Weekdays should add up to <b>8 hours</b>, weekend days should add up to <b>zero</b>. 
-      %li If you need to add some hours to boost the total in a day use <b>"Annual Leave"</b>, and if you need to subtract some hours then use <b>"Personal Sacrifice"</b>, with a <b>negative</b> number. 
-      %li The hours you put into personal sacrifice will get added back into leave allowance, so I promise that everything will nett out in the end. 
+      %li Leave Taken/Earned is used to balance your days. When you take leave, put a positive number in here. When you work overtime, put a negative number in here (you get leave back). This reflects our overtime policy (look at the bottom)
       %li And we have an answer to the perennial question of "should my week add up to 40 hours regardless of the work I do" - YES!
 
 = render :partial => 'select_person'
 
 - if @timesheet
   = render :partial => 'timesheet', :locals => { :timesheet => @timesheet }
+  %h4 Cogent Overtime Policy
+  %p
+    We don't encourage people to work more than 40 hours a week. If you need to work more than 40 hours a week to get your job done, then you'll have the extra hours added to your leave. If you're working more hours for the love of it, or on some pet project, then that's not overtime and it doesn't need to be accounted for at all. You're all pretty smart, and most of the time it will be clear. If it's not, talk to Marty, Steve or Rachel.
+
