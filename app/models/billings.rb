@@ -27,15 +27,15 @@ class Billings
   end
   
   def billing
-    timesheets.sum &:billing
+    @billing ||= timesheets.sum &:billing
   end
   
   def costs
-    timesheets.sum &:costs
+    @costs ||= timesheets.sum &:costs
   end
   
   def margin
-    timesheets.sum &:margin
+    @margin ||= timesheets.sum &:margin
   end
   
   private
@@ -71,19 +71,19 @@ class ProjectBillings
   end
   
   def total
-    @timesheets.sum &:total
+    @total ||= @timesheets.sum &:total
   end
   
   def billing
-    @timesheets.sum &:billing
+    @billing ||= @timesheets.sum &:billing
   end
   
   def costs
-    @timesheets.sum &:costs
+    @costs ||= @timesheets.sum &:costs
   end
   
   def margin
-    @timesheets.sum &:margin
+    @margin ||= @timesheets.sum &:margin
   end
   
 end
@@ -99,27 +99,27 @@ class BillingTimesheet
   end
   
   def total
-    @timesheet.total
+    @total ||= @timesheet.total
   end
   
   def billing
-    @timesheet.billing
+    @billing ||= @timesheet.billing
   end
   
   def hours
-    @timesheet.hours
+    @hours ||= @timesheet.hours
   end
   
   def costs
-    @timesheet.costs
+    @cost ||= @timesheet.costs
   end
   
   def margin
-    @timesheet.margin
+    @margin ||= @timesheet.margin
   end
   
   def rate
-    @project.rate_for(@person)
+    @rate ||= @project.rate_for(@person)
   end
   
 end
