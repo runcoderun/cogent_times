@@ -11,13 +11,9 @@ class Billings
   end
   
   def projects
-    @timesheets_by_project.keys.sort_by{|project| project.name.downcase}
+    @timesheets_by_project.keys.sort_by{|project| project.name.downcase}.collect {|project| ProjectBillings.new(project, timesheets_for(project))}
   end
      
-  def timesheets_for(project)
-    @timesheets_by_project[project]
-  end
-  
   def timesheets_for_category(project_category)
     project_category.projects.collect {|project| self.timesheets_for(project) || []}.flatten
   end
@@ -53,6 +49,41 @@ class Billings
   
   def timesheets
     @timesheets_by_project.values.flatten
+  end
+  
+  def timesheets_for(project)
+    @timesheets_by_project[project]
+  end
+  
+end
+
+class ProjectBillings
+
+  attr_reader :timesheets
+  
+  def initialize(project, timesheets)
+    @project = project
+    @timesheets = timesheets
+  end
+
+  def name
+    @project.name
+  end
+  
+  def total
+    @timesheets.sum &:total
+  end
+  
+  def billing
+    @timesheets.sum &:billing
+  end
+  
+  def costs
+    @timesheets.sum &:costs
+  end
+  
+  def margin
+    @timesheets.sum &:margin
   end
   
 end
