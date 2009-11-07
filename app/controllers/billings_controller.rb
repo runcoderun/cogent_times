@@ -3,7 +3,7 @@ require 'date_extensions'
 class BillingsController < SecureController
   
   def index
-    projects = Project.all
+    projects = Project.all.select{|project| project.use_in_reports}
     start_date = params['start_date'] ? params['start_date'].to_date : default_start_date
     end_date = params['end_date'] ? params['end_date'].to_date : default_end_date
     @billings = Billings.new(Project.all, start_date, end_date)
