@@ -1,0 +1,11 @@
+%dl
+  %dt
+    %label{:for => "public_holiday_date"}
+      Date:
+  %dd
+  = date_select(:public_holiday, :date, :default => Date.today )
+  %dt
+    %label{:for => "public_holiday_description"}
+      Description:
+  %dd
+    = form.text_field :description, :size => '30', :maxlength => 100

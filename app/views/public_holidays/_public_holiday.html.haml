@@ -1,0 +1,5 @@
+%tr
+  %td= public_holiday.id
+  %td= public_holiday.date.strftime('%Y-%m-%d')
+  %td= public_holiday.description
+  %td= link_to "Delete", public_holiday_url(public_holiday.id), :method => :delete, :confirm => "Are you sure you want to delete #{public_holiday.date.strftime('%Y-%m-%d')}?", :class => "Delete"
