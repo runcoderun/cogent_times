@@ -42,10 +42,28 @@ class EmploymentCostsCalculator
   # end of constants
   ###################
   
-  def initialize(salary, fte_weight, oncosts)
+  def initialize(person_id, person_name, salary, fte_weight, oncosts)
+    @person_id = person_id
+    @person_name = person_name
     @salary = salary
     @fte_weight = fte_weight
     @oncosts = oncosts
+  end
+  
+  def person_id
+    @person_id
+  end
+  
+  def person_name
+    @person_name
+  end
+  
+  def salary
+    @salary
+  end
+  
+  def fte
+    @fte_weight
   end
   
   def superannuation

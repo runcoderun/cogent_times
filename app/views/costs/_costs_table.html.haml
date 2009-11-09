@@ -11,4 +11,16 @@
   %th{:valign=>'bottom', :align => 'right'} Oncosts
   %th{:valign=>'bottom', :align => 'right'} Daily<br> Cost
   %th{:valign=>'bottom', :align => 'right'} Average <br>Monthly Cost
- = render :partial => "person", :collection => @people, :locals => {:oncosts => oncosts}
+ = render :partial => "person_costs", :collection => @costs.people_costs
+ %tr
+ %td{:align => 'right'} &nbsp;
+ %td{:align => 'right'} &nbsp;
+ %td{:align => 'right'} &nbsp;
+ %td{:align => 'right'} &nbsp;
+ %td{:align => 'right'} &nbsp;
+ %td{:align => 'right'} &nbsp;
+ %td{:align => 'right'} &nbsp;
+ %td{:align => 'right'}= currencify(@costs.weighted_wages_costs)
+ %td{:align => 'right'}= currencify(@costs.oncosts)
+ %td{:align => 'right'}= currencify(@costs.daily_cost)
+ %td{:align => 'right'}= currencify(@costs.average_monthly_cost)

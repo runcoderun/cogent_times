@@ -1,0 +1,12 @@
+%tr
+  %td= person_costs.person_id
+  %td= person_costs.person_name
+  %td{:align=>'right'}= currencify(person_costs.salary)
+  %td{:align=>'right'}= person_costs.fte
+  %td{:align=>'right'}= currencify(person_costs.superannuation)
+  %td{:align=>'right'}= currencify(person_costs.payroll_tax)
+  %td{:align=>'right'}= currencify(person_costs.total_wages_costs)
+  %td{:align=>'right'}= currencify(person_costs.weighted_wages_costs)
+  %td{:align=>'right'}= currencify(person_costs.oncosts)
+  %td{:align=>'right'}= currencify(person_costs.daily_cost)
+  %td{:align=>'right'}= currencify(person_costs.average_monthly_cost)
