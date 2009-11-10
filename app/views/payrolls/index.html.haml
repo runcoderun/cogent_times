@@ -1,5 +1,5 @@
-= link_to '<< Previous', payrolls_url(:start_date => Date.today)
-= link_to 'Next >>', payrolls_url(:start_date => Date.today)
+= link_to '<< Previous', payrolls_url(:date => @month.start_date-1)
+= link_to 'Next >>', payrolls_url(:date => @month.end_date+1)
 
 %p
   Payroll from: 
