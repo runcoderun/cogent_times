@@ -28,5 +28,5 @@
       %td{:align => 'center'}= person.days_worked_in(@month)
       - weighting = person.days_worked_in(@month) / @month.working_day_count
       %td{:align => 'center'}= currencify(person.salary/SystemSetting.months_per_year * weighting)
-      %td{:align => 'center'}= SystemSetting.annual_leave_days_per_year * weighting
-      %td{:align => 'center'}= SystemSetting.sick_leave_days_per_year * weighting
+      %td{:align => 'center'}= number_with_precision(SystemSetting.annual_leave_days_per_year * weighting, :precision => 2)
+      %td{:align => 'center'}= number_with_precision(SystemSetting.sick_leave_days_per_year * weighting, :precision => 2)
