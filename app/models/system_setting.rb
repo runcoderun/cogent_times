@@ -7,7 +7,23 @@ class SystemSetting
   property :value, String, :nullable => true
   
   def self.hours_per_day
-    return 8.0
+    8.0
+  end
+  
+  def self.months_per_year
+    12
+  end
+  
+  def self.public_holidays_per_year
+    11
+  end
+  
+  def self.annual_leave_days_per_year
+    20
+  end
+  
+  def self.sick_leave_days_per_year
+    10
   end
   
   def self.smtp_password

@@ -1,0 +1,32 @@
+= link_to '<< Previous', payrolls_url(:start_date => Date.today)
+= link_to 'Next >>', payrolls_url(:start_date => Date.today)
+
+%p
+  Payroll from: 
+  = @month.start_date.to_s
+  to:
+  = @month.end_date.to_s
+
+%table
+  %tr
+    %th Person
+    %th Annual Salary
+    %th Monthly Salary
+    %th Days in Month
+    %th Leave without pay
+    %th Days worked
+    %th Adjusted salary
+    %th Annual Leave accrued
+    %th Sick Leave accrued
+  - @people.each do |person|
+    %tr
+      %td= person.full_name
+      %td= currencify(person.salary)
+      %td= currencify(person.salary/SystemSetting.months_per_year)
+      %td{:align => 'center'}= @month.working_day_count
+      %td{:align => 'center'}= person.days_leave_without_pay_in(@month)
+      %td{:align => 'center'}= person.days_worked_in(@month)
+      - weighting = person.days_worked_in(@month) / @month.working_day_count
+      %td{:align => 'center'}= currencify(person.salary/SystemSetting.months_per_year * weighting)
+      %td{:align => 'center'}= SystemSetting.annual_leave_days_per_year * weighting
+      %td{:align => 'center'}= SystemSetting.sick_leave_days_per_year * weighting

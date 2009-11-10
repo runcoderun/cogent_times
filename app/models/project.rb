@@ -19,6 +19,10 @@ class Project
   
   delegate :use_in_reports, :to => :project_category
 
+  def self.leave_without_pay
+    Project.first(:name => 'Leave Without Pay')
+  end
+  
   def self.annual_leave
     Project.first(:name => 'Annual Leave')
   end
@@ -44,7 +48,7 @@ class Project
     if use_fixed_daily_rate
       return fixed_daily_rate / SystemSetting.hours_per_day
     else
-      return EmploymentCostsCalculator.new(person.salary, person.fte, oncosts).hourly_cost
+      return EmploymentCostsCalculator.new(person.id, person.full_name, person.salary, person.fte, oncosts).hourly_cost
     end
   end
    

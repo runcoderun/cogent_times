@@ -30,5 +30,13 @@ class Person
   def sick_leave_taken
     Timesheet.new(self, :project => Project.sick_leave).hours
   end
-      
+   
+  def days_leave_without_pay_in(month)
+    Timesheet.new(self, :project => Project.leave_without_pay, :date_range => month.date_range).total/SystemSetting.hours_per_day
+  end   
+
+  def days_worked_in(month)
+    month.working_day_count - days_leave_without_pay_in(month)
+  end   
+
 end

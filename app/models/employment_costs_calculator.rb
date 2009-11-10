@@ -6,24 +6,12 @@ class EmploymentCostsCalculator
   # constants
   #############
   
-  def self.public_holidays_per_year
-    11
-  end
-  
-  def self.annual_leave_days_per_year
-    20
-  end
-  
-  def self.sick_leave_days_per_year
-    10
-  end
-  
   def self.weekdays_per_year
     250
   end
   
   def self.working_days_per_year
-    self.weekdays_per_year - self.public_holidays_per_year - self.annual_leave_days_per_year - self.sick_leave_days_per_year
+    self.weekdays_per_year - SystemSetting.public_holidays_per_year - SystemSetting.annual_leave_days_per_year - SystemSetting.sick_leave_days_per_year
   end
   
   def superannuation_rate
@@ -32,10 +20,6 @@ class EmploymentCostsCalculator
   
   def payroll_tax_rate
     0.055
-  end
-  
-  def months_per_year
-    12
   end
   
   ###################
@@ -99,7 +83,7 @@ class EmploymentCostsCalculator
   end
   
   def average_monthly_cost    
-    self.weighted_total_cost / self.months_per_year
+    self.weighted_total_cost / SystemSetting.months_per_year
   end
 
   def weighted_working_days

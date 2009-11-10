@@ -3,12 +3,22 @@ require 'range_extensions'
 
 class Month
   
+  attr_reader :date_range
+  
   def initialize(some_date)
     @date_range = some_date.start_of_month..some_date.end_of_month
   end
   
   def working_day_count
     @working_day_count ||= working_days.size
+  end
+  
+  def start_date
+    @date_range.first
+  end
+  
+  def end_date
+    @date_range.last
   end
   
   private

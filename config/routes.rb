@@ -30,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :system_settings
   map.resources :users
   map.resources :public_holidays
+  map.resources :payrolls
 
   map.resources :home
   map.resources :session, :collection => { :create => :get, :delete => :get }
