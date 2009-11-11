@@ -1,7 +1,5 @@
 class UtilisationsController < BillingsController
 
-  include ActionView::Helpers::NumberHelper
-  
   def select_date_range
     redirect_to utilisations_url(:start_date => selected_start_date, :end_date => selected_end_date)
   end
@@ -11,7 +9,6 @@ class UtilisationsController < BillingsController
     chart = Ambling::Data::Pie.new
     ProjectCategory.reportable.each do |category|
       hours = billings.timesheets_for_category(category).sum &:hours
-      percentage = number_to_percentage(hours / billings.reportable_hours * 100.0,:precision => 2)
       chart.slices << Ambling::Data::Slice.new(hours, :title => category.name)
     end
     render :xml => chart.to_xml
