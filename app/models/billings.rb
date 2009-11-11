@@ -37,6 +37,11 @@ class Billings
   def margin
     @margin ||= timesheets.sum &:margin
   end
+
+  # still used by utilisation code
+  def timesheets_for(project)
+    @timesheets_by_project[project]
+  end
   
   private
   
@@ -49,10 +54,6 @@ class Billings
   
   def timesheets
     @timesheets_by_project.values.flatten
-  end
-  
-  def timesheets_for(project)
-    @timesheets_by_project[project]
   end
   
 end
