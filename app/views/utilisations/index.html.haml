@@ -12,4 +12,5 @@
 
 - start_date = @billings.start_date
 - end_date = @billings.end_date
-= pie_chart("Utilisation #{start_date.strftime('%d/%m/%y')} to #{end_date.strftime('%d/%m/%y')}", 'pie_data', start_date, end_date)
+- heading = "Utilisation #{start_date.strftime('%d/%m/%y')} to #{end_date.strftime('%d/%m/%y')}"
+= pie_chart(@billings, heading)
