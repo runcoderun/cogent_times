@@ -19,3 +19,8 @@
       Hours:
   %dd
     = form.text_field :hours, :size => '10', :maxlength => 6
+  %dt
+    %label{:for => "work_period_description"}
+      Description:
+  %dd
+    = form.text_field :description, :size => '50'

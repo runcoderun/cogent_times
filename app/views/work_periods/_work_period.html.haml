@@ -4,5 +4,6 @@
   %td= work_period.project.name
   %td= work_period.date.to_s
   %td= work_period.hours.to_s
+  %td= work_period.description
   %td= link_to "Edit", work_period_url(work_period.id), :class => "Edit"
   %td= link_to "Delete", work_period_url(work_period.id), :method => :delete, :confirm => "Are you sure you want to delete #{work_period.id}?", :class => "Delete"

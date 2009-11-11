@@ -5,6 +5,7 @@ class WorkPeriod
    property :id,          Serial
    property :date,        Date, :nullable => false
    property :hours,       Float, :nullable => false
+   property :description, String, :nullable => false
    belongs_to :person
    belongs_to :project
    
