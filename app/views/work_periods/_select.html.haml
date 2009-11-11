@@ -1,0 +1,15 @@
+%p
+= form_tag('/work_periods/select')
+Start Date: 
+= select_date(@start_date || Date.today, :prefix => 'start_date')
+%br
+End Date: 
+= select_date(@end_date || Date.today, :prefix => 'end_date')
+%br
+Person:
+= select_tag :person_id, (options_for_select({ "Everyone" => nil }, @person_id) + options_from_collection_for_select(Person.all, 'id', 'full_name', @person_id))
+%br
+Project:
+= select_tag :project_id, (options_for_select({ "All projects" => nil }, @project_id) + options_from_collection_for_select(Project.all, 'id', 'name', @project_id))
+= submit_tag "Select"
+= "</form>"

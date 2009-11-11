@@ -1,5 +1,21 @@
+%h3 Summary
+
 %p This is a very simple timesheet application to help us keep track of billing and leave. I'll be gradually extending it over time, but it's already good enough for you to enter your hours for a week (except for time-in-lieu). The next priority is to add things to make it easier for Amanda to do the invoicing and to add some ways to remind people that they need to enter their times.
+
+%h3 Authentication
+
+%p Authentication is handled by Google OAuth with another check against a list of known users
+
+%h3 Authorisation
 
 %p In line with our usual policy, there are no restrictions once you login - you can do anything on anyone's behalf.
 
-%p Authentication is handled by Google OAuth with another check against a list of known users
+%h3 Some explanation
+
+%ol
+  %li 
+    All costs are approximations, based on estimated annual costs of 
+    = currencify(Oncost.on(Date.today).amount)
+    and the assumption that everyone takes all their annual leave and sick leave
+  %li Invoicing may not always exactly reflect hours recorded
+  %li This information is as close to real-time as we get, and everything else lags. Invoicing is done at the end of the month, so the income accrual is a month later than the timesheets, and the customers pay some time after that - sometimes in the same month as the invoice, often in the month after

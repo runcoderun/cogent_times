@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :people do |person|
     person.resources :salaries
   end
-  map.resources :work_periods, :collection => {:cleanup => :post}
+  map.resources :work_periods, :collection => {:cleanup => :post, :select => :post}
   map.resources :oncosts
   map.resources :assignments
   map.resources :system_settings

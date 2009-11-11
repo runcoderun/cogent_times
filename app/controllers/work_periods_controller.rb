@@ -1,6 +1,32 @@
+require 'date_extensions'
+
 class WorkPeriodsController < SecureController
 
+  include DateRangeSelection
+
   resources_controller_for :work_periods
+  
+  def select
+    require 'pp'
+    pp params
+    constraints = { :start_date => selected_start_date, :end_date => selected_end_date }
+    constraints[:person_id] = params[:person_id] unless params[:person_id].blank?
+    constraints[:project_id] = params[:project_id] unless params[:project_id].blank?
+    redirect_to work_periods_url(constraints)
+  end
+  
+  def index
+    require 'pp'
+    pp params
+    @start_date = start_date
+    @end_date = end_date
+    @person_id = params[:person_id].to_i if params[:person_id]
+    @project_id = params[:project_id].to_i if params[:project_id]
+    constraints = { :date.gte => start_date, :date.lte => end_date }
+    constraints[:person_id] = @person_id if @person_id
+    constraints[:project_id] = @project_id if @project_id
+    @work_periods = WorkPeriod.all(constraints)
+  end
   
   def create
     reformat_params
