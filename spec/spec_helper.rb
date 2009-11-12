@@ -19,7 +19,7 @@ module Authenticated
     true
   end
 end
-  
+   
 Spec::Runner.configure do |config|
   
   config.before(:all)    { Sham.reset(:before_all)  }
