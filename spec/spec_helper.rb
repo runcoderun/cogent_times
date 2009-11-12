@@ -14,6 +14,12 @@ require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
+class SecureController
+  def skip_authentication?
+    raise 'You need to specify either logged in or not'
+  end
+end
+
 module Authenticated
   def skip_authentication?
     true
