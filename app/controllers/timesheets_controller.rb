@@ -12,7 +12,11 @@ class TimesheetsController < SecureController
     period = WorkPeriod.first(key) || WorkPeriod.new(key)
     period.hours = hours
     period.save
-    render :nothing => true
+    if period.errors.size > 0
+      render :js => "alert('#{periods.errors.to_s}')"
+    else
+      render :nothing => true
+    end
   end
   
   def select

@@ -11,8 +11,4 @@ describe WorkPeriodsController do
 
   it_should_behave_like "any crud controller"
   
-  it "should fail" do
-    get :does_not_exist
-  end
-  
 end

@@ -14,7 +14,7 @@
       - @timesheet.date_range.each do |date|
         %td= text_field_tag("work_#{project.id}_#{date.as_json}", @timesheet.work(project, date), :size => 3, :class => "#{project.name.parameterize.to_s} #{date.as_json} hours")
 
-        = observe_field("work_#{project.id}_#{date.as_json}", :url => timesheet_url(@timesheet.person_id), :method => :put, :with => "'hours=' + value + '&project_id=#{project.id}&date=#{date.as_json}'")
+        = observe_field("work_#{project.id}_#{date.as_json}", :url => timesheet_url(@timesheet.person_id), :method => :put, :with => "'hours=' + value + '&project_id=#{project.id}&date=#{date.as_json}'", :update => "work_#{project.id}_#{date.as_json}")
 
         = observe_field("work_#{project.id}_#{date.as_json}", :url => project_total_timesheet_url(@timesheet.person_id), :method => :get, :function => "$('project_total_#{project.id}').update(sum_selector('.#{project.name.parameterize.to_s}'))")
 
