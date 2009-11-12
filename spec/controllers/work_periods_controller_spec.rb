@@ -7,7 +7,7 @@ describe WorkPeriodsController do
     @controller.extend Authenticated
   end
   
-  model(WorkPeriod) {{:person => Person.make, :project => Project.make, :hours => 1.0, :date => Date.today}}
+  model(WorkPeriod) {{:person => Person.make, :project => Project.make, :hours => 1.0, :date => Date.today, :description => nil}}
 
   it_should_behave_like "any crud controller"
   

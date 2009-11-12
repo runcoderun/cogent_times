@@ -8,10 +8,16 @@ class TimesheetsController < SecureController
   end
    
   def update
+    puts 'In update'
+    pp params 
     key = { :project_id => project_id, :person_id => person_id, :date => date }
     period = WorkPeriod.first(key) || WorkPeriod.new(key)
+    require 'pp'
+    pp period 
     period.hours = hours
     period.save
+    pp period 
+    pp period.errors
     render :nothing => true
   end
   

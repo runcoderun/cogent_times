@@ -2,7 +2,7 @@ migration 22, :add_work_period_descriptions do
     
   up do
     modify_table :work_periods do
-      add_column :description, String, :nullable? => false, :default => ''
+      add_column :description, String
     end
     
   end
