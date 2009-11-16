@@ -1,15 +1,23 @@
 = render :partial => 'billings/select_start_date'
+- total_hours = @billings.reportable_hours
 %table
   %tr
     %th Category
     %th Hours
+    %th Days
     %th Percent
     - ProjectCategory.reportable.each do |category|
       %tr
         %td= category.name
         %td= hours = (@billings.timesheets_for_category(category).sum &:hours)
-        %td= number_to_percentage(hours / @billings.reportable_hours * 100.0,:precision => 2)
-
+        %td= number_with_precision(hours/SystemSetting.hours_per_day, :precision =>2)
+        %td= number_to_percentage(hours / total_hours * 100.0,:precision => 2)
+  %tr
+    %td Total
+    %td= total_hours
+    %td= number_with_precision(total_hours/SystemSetting.hours_per_day, :precision =>2)
+    %td 100.0%
+    
 - start_date = @billings.start_date
 - end_date = @billings.end_date
 - heading = "Utilisation #{start_date.strftime('%d/%m/%y')} to #{end_date.strftime('%d/%m/%y')}"
