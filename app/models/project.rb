@@ -31,6 +31,14 @@ class Project
     Project.first(:name => 'Sick Leave')
   end
   
+  def work_periods_to(date)
+    self.work_periods(:date.lte => date)
+  end
+  
+  def expenses_to(date)
+    self.expenses(:date.lte => date)
+  end
+  
   def people
     return (work_periods.collect &:person).uniq
   end
@@ -56,20 +64,36 @@ class Project
     project_category.name
   end
   
-  def labour_costs
-    self.work_periods.sum &:costs
+  # def labour_costs
+  #   return labour_costs_to(Date.today)
+  # end
+  
+  def labour_costs_to(date)
+    self.work_periods_to(date).sum &:costs
   end
   
-  def hours
-    self.work_periods.sum &:hours
+  # def hours
+  #   return hours_to(Date.today)
+  # end
+  
+  def hours_to(date)
+    self.work_periods_to(date).sum &:hours
   end
   
-  def expenses_amount
-    self.expenses.sum &:amount
+  # def expenses_amount
+  #   self.expenses.sum &:amount
+  # end
+  
+  def expenses_amount_to(date)
+    self.expenses_to(date).sum &:amount
   end
   
-  def cost_to_date
-    return self.starting_cost + self.labour_costs + self.expenses_amount
+  # def cost_to_date
+  #   return cost_to(Date.today)
+  # end
+  
+  def cost_to(date)
+    return self.starting_cost + self.labour_costs_to(date) + self.expenses_amount_to(date)
   end
   
 end
