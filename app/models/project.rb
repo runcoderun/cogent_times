@@ -65,35 +65,23 @@ class Project
     project_category.name
   end
   
-  # def labour_costs
-  #   return labour_costs_to(Date.today)
-  # end
-  
   def labour_costs_to(date)
     self.work_periods_to(date).sum &:costs
   end
-  
-  # def hours
-  #   return hours_to(Date.today)
-  # end
   
   def hours_to(date)
     self.work_periods_to(date).sum &:hours
   end
   
-  # def expenses_amount
-  #   self.expenses.sum &:amount
-  # end
-  
   def expenses_amount_to(date)
     self.expenses_to(date).sum &:amount
   end
   
-  # def cost_to_date
-  #   return cost_to(Date.today)
-  # end
+  def total_hours_to(date)
+    return self.starting_hours + self.hours_to(date)
+  end
   
-  def cost_to(date)
+  def total_cost_to(date)
     return self.starting_cost + self.labour_costs_to(date) + self.expenses_amount_to(date)
   end
   
