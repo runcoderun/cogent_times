@@ -2,4 +2,4 @@
  .title
   %h1 Costs
   = render :partial => "costs_table", :locals => {:oncosts => @oncosts}
-  %p= "Daily cost is based on the number of working days in a year (#{EmploymentCostsCalculator.working_days_per_year}), excluding public holidays (#{EmploymentCostsCalculator.public_holidays_per_year}), annual leave (#{EmploymentCostsCalculator.annual_leave_days_per_year}) and sick leave (#{EmploymentCostsCalculator.sick_leave_days_per_year})"
+  %p= "Daily cost is based on the number of working days in a year (#{EmploymentCostsCalculator.working_days_per_year}), excluding public holidays (#{SystemSetting.public_holidays_per_year}), annual leave (#{SystemSetting.annual_leave_days_per_year}) and sick leave (#{SystemSetting.sick_leave_days_per_year})"

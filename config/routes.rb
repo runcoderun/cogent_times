@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
     project.resources :stories
     project.resources :expenses
   end
+  map.resources :project_costs
   map.resources :people do |person|
     person.resources :salaries
   end
