@@ -9,6 +9,7 @@ class Project
   property :fixed_daily_rate, Float, :default => 0.0
   property :use_fixed_daily_rate, Boolean, :nullable => false, :default => false
   property :starting_cost, Float, :nullable => false, :default => 0.0
+  property :starting_hours, Float, :nullable => false, :default => 0.0
   
   belongs_to :project_category
   validates_present :project_category

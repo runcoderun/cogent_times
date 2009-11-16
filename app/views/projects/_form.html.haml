@@ -10,6 +10,11 @@
   %dd
     = collection_select(:project, :project_category_id, ProjectCategory.all, :id, :name, {:prompt => true})
   %dt
+    %label{:for => "project_starting_hours"}
+      Starting Hours:
+  %dd
+    = form.text_field :starting_hours, :size => '30', :maxlength => '100'
+  %dt
     %label{:for => "project_starting_cost"}
       Starting Cost:
   %dd

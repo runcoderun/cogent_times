@@ -2,6 +2,7 @@
   %td= project.id
   %td= project.name
   %td= project.category_name
+  %td{:align => 'center'}= number_with_precision(project.starting_hours/SystemSetting.hours_per_day, :precision => 2)
   %td{:align => 'center'}= currencify(project.starting_cost)
   %td{:align => 'center'}= project.use_fixed_daily_rate
   %td= project.fixed_daily_rate

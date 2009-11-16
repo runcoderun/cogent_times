@@ -1,6 +1,7 @@
 %tr
   %td= project.id
   %td= project.name
+  %td{:align => 'center'}= number_with_precision(project.starting_hours/SystemSetting.hours_per_day, :precision =>2)
   %td{:align => 'center'}= currencify(project.starting_cost)
   %td{:align => 'center'}= currencify(project.labour_costs_to(@date))
   %td{:align => 'center'}= number_with_precision(project.hours_to(@date)/SystemSetting.hours_per_day, :precision =>2)
