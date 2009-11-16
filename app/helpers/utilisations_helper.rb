@@ -6,7 +6,7 @@ module UtilisationsHelper
     chart = Ambling::Data::Pie.new
     ProjectCategory.reportable.each do |category|
       hours = billings.timesheets_for_category(category).sum &:hours
-      chart.slices << Ambling::Data::Slice.new(hours, :title => category.name)
+      chart.slices << Ambling::Data::Slice.new(hours/SystemSetting.hours_per_day, :title => category.name)
     end
     return chart
   end
@@ -26,7 +26,7 @@ module UtilisationsHelper
         :pull_out_on_click => true,
       },
       :data_labels => {
-        :show => cdata_section("<b>{title}: {percents}%25</b>")#, :radius => -50,
+        :show => cdata_section("<b>{title}: {value} days ({percents})%25</b>")#, :radius => -50,
       },
       :legend => {
         :enabled => true, :x => 490, :y => 100, :width => 200, :text_color => '#000',
