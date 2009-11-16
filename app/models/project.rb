@@ -60,6 +60,10 @@ class Project
     self.work_periods.sum &:costs
   end
   
+  def hours
+    self.work_periods.sum &:hours
+  end
+  
   def expenses_amount
     self.expenses.sum &:amount
   end
