@@ -5,10 +5,6 @@
   %td{:align => 'center'}= currencify(project.starting_cost)
   %td{:align => 'center'}= project.use_fixed_daily_rate
   %td= project.fixed_daily_rate
-  %td{:align => 'center'}= currencify(project.labour_costs)
-  %td{:align => 'center'}= number_with_precision(project.hours/SystemSetting.hours_per_day, :precision =>2)
-  %td{:align => 'center'}= currencify(project.expenses_amount)
-  %td{:align => 'center'}= currencify(project.cost_to_date)
   %td= link_to "Expenses", project_expenses_url(project.id)
   %td= link_to "Stories", project_stories_url(project.id)
   %td= link_to "Edit", project_url(project.id), :class => "Edit"
