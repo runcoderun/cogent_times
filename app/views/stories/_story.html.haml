@@ -1,6 +1,7 @@
 %tr
   %td= story.id
   %td= story.name
+  %td= story.pivotal_id
   %td= story.completed ? 'Done' : 'Not started'
   %td= story.created_at.strftime('%Y-%m-%d %H:%M:%S')
   %td= story.updated_at.strftime('%Y-%m-%d %H:%M:%S')

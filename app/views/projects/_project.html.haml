@@ -6,6 +6,7 @@
   %td{:align => 'center'}= currencify(project.starting_cost)
   %td{:align => 'center'}= project.use_fixed_daily_rate
   %td= project.fixed_daily_rate
+  %td= project.pivotal_id
   %td= link_to "Expenses", project_expenses_url(project.id)
   %td= link_to "Stories", project_stories_url(project.id)
   %td= link_to "Edit", project_url(project.id), :class => "Edit"

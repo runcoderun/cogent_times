@@ -5,6 +5,7 @@ class Story
    
    property :id,           Serial
    property :name,         String, :nullable => false
+   property :pivotal_id,   Integer, :nullable => true
    property :created_at,   DateTime
    property :updated_at,   DateTime
    property :completed,    Boolean

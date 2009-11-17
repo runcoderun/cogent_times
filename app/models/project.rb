@@ -10,6 +10,7 @@ class Project
   property :use_fixed_daily_rate, Boolean, :nullable => false, :default => false
   property :starting_cost, Float, :nullable => false, :default => 0.0
   property :starting_hours, Float, :nullable => false, :default => 0.0
+  property :pivotal_id, Integer, :nullable => true
   
   belongs_to :project_category
   validates_present :project_category
@@ -30,6 +31,10 @@ class Project
   
   def self.sick_leave
     Project.first(:name => 'Sick Leave')
+  end
+  
+  def uses_pivotal?
+    return !!self.pivotal_id
   end
   
   def work_periods_to(date)
@@ -83,6 +88,28 @@ class Project
   
   def total_cost_to(date)
     return self.starting_cost + self.labour_costs_to(date) + self.expenses_amount_to(date)
+  end
+  
+  def synchronise_with_pivotal
+    return unless uses_pivotal?
+    pivotal_tracker.stories.each do |story|
+      ensure_pivotal_story(story.id, story.name)
+    end
+    return self
+  end
+  
+  def pivotal_tracker
+    @pivotal_tracker ||= CogentPivotalTracker.new(self.pivotal_id)
+  end
+  
+  private
+
+  def ensure_pivotal_story(pivotal_id, name)
+    story = self.stories(:pivotal_id => pivotal_id).first || ::Story.new(:project_id => self.id, :pivotal_id => pivotal_id)
+    if story.name != name
+      story.name = name
+      story.save
+    end
   end
   
 end

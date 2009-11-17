@@ -12,6 +12,11 @@ class StoriesController < SecureController
     super
   end
   
+  def synchronise
+    @project.synchronise_with_pivotal
+    redirect_to project_stories_url, :project_id => @project.id
+  end
+  
   private
 
   def reformat_params
