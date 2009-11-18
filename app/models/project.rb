@@ -107,10 +107,7 @@ class Project
       if !status && action.new_state # ignore comments etc
         story = Story.first(:pivotal_id => action.story_id)
         status = StoryStatus.new(:atom_id => action.atom_id, :story => story, :person_name => action.name, :status => action.new_state, :datetime => action.timestamp)
-        status.save
-        require 'pp'
-        pp status.errors
-        
+        status.validate_and_save
       end
     end
   end
@@ -121,20 +118,15 @@ class Project
   
   private
 
-  require 'pp'
-
   def ensure_pivotal_story(pivotal_id, name, current_state)
     story = self.stories(:pivotal_id => pivotal_id).first || ::Story.new(:project_id => self.id, :pivotal_id => pivotal_id)
     if story.name != name
       story.name = name
       story.validate_and_save
-      pp story.errors
     end
     if story.current_state != current_state
-      pp "Story = #{story.id}"
       status = StoryStatus.new(:story => story, :person_name =>'' , :status => current_state, :datetime => Time.new)
       status.validate_and_save
-      pp status.errors
     end
   end
   
