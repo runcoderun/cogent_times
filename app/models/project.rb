@@ -11,6 +11,7 @@ class Project
   property :starting_cost, Float, :nullable => false, :default => 0.0
   property :starting_hours, Float, :nullable => false, :default => 0.0
   property :pivotal_id, Integer, :nullable => true
+  property :pivotal_activity_feed_id, String, :nullable => true
   
   belongs_to :project_category
   validates_present :project_category
@@ -96,6 +97,26 @@ class Project
       ensure_pivotal_story(story.id, story.name)
     end
     return self
+  end
+  
+  def update_from_pivotal_activity
+    return unless uses_pivotal?
+    CogentPivotalTrackerActivity.new(self.pivotal_id, self.pivotal_activity_feed_id).each do |action|
+      puts action.atom_id
+      puts action.story_id
+      puts action.name
+      puts action.action
+      puts action.new_state
+      status = StoryStatus.first(:atom_id => action.atom_id)
+      if !status && action.new_state # ignore comments etc
+        story = Story.first(:pivotal_id => action.story_id)
+        status = StoryStatus.new(:atom_id => action.atom_id, :story => story, :person_name => action.name, :status => action.new_state, :datetime => action.timestamp)
+        status.save
+        require 'pp'
+        pp status.errors
+        
+      end
+    end
   end
   
   def pivotal_tracker

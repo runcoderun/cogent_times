@@ -12,6 +12,7 @@ class Story
    property :completed_at, DateTime
    
    belongs_to :project
+   has n, :story_statuses, :constraint => :destroy
    
    validates_present :project
 

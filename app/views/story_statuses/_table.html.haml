@@ -1,0 +1,7 @@
+%table
+ %tr
+  %th{:align => 'center'} Id
+  %th{:align => 'center'} Status
+  %th{:align => 'center'} Person
+  %th{:align => 'center'} Date
+ = render :partial => "story_status", :collection => @story_statuses

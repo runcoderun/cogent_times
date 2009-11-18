@@ -17,6 +17,11 @@ class StoriesController < SecureController
     redirect_to project_stories_url, :project_id => @project.id
   end
   
+  def activity
+    @project.update_from_pivotal_activity
+    redirect_to project_stories_url, :project_id => @project.id
+  end
+  
   private
 
   def reformat_params

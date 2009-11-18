@@ -5,3 +5,4 @@
   %p
   = link_to 'Create', new_project_story_url
   = (link_to 'Synchronise', synchronise_project_stories_url, :method => :put) if @project.uses_pivotal?
+  = (link_to 'Activity', activity_project_stories_url, :method => :put) if @project.uses_pivotal?

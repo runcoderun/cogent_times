@@ -7,15 +7,11 @@ require 'hpricot'
 
 class CogentPivotalTracker
 
-  delegate :stories, :to => :pivotal_tracker
+  delegate :stories, :activities, :to => :pivotal_tracker
 
   def initialize(project_id)
     @project_id = project_id
   end
-  
-  # def stories
-  #   return pivotal_tracker.stories
-  # end
   
   private
   

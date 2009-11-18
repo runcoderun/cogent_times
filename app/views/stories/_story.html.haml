@@ -6,5 +6,6 @@
   %td= story.created_at.strftime('%Y-%m-%d %H:%M:%S')
   %td= story.updated_at.strftime('%Y-%m-%d %H:%M:%S')
   %td{:align => 'center'}= story.completed ? story.completed_at.strftime('%Y-%m-%d %H:%M:%S') : '-'
+  %td= link_to "Statuses", project_story_story_statuses_url(story.project.id, story.id)
   %td= link_to "Edit", project_story_url(story.project.id, story.id), :class => "Edit"
   %td= link_to "Delete", project_story_url(story.project.id, story.id), :method => :delete, :confirm => "Are you sure you want to delete #{story.name}?", :class => "Delete"

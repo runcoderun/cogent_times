@@ -18,7 +18,9 @@ ActionController::Routing::Routes.draw do |map|
   # move these to a namespace
   map.resources :project_categories
   map.resources :projects do |project|
-    project.resources :stories, :collection => {:synchronise => :put}
+    project.resources :stories, :collection => {:synchronise => :put ,:activity => :put} do |story|
+      story.resources :story_statuses
+    end
     project.resources :expenses
   end
   map.resources :project_costs
@@ -32,6 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :public_holidays
   map.resources :payrolls
+  map.resources :errors
 
   map.resources :home
   map.resources :session, :collection => { :create => :get, :delete => :get }
