@@ -3,6 +3,7 @@ class Project
   include DataMapper::Resource
   include DataMapper::Constraints
   include DataMapper::ActiveRecordAdapter
+  include DataMapper::ValidateAndSave
     
   property :id,    Serial
   property :name,  String, :nullable => false
@@ -94,7 +95,7 @@ class Project
   def synchronise_with_pivotal
     return unless uses_pivotal?
     pivotal_tracker.stories.each do |story|
-      ensure_pivotal_story(story.id, story.name)
+      ensure_pivotal_story(story.id, story.name, story.current_state.capitalize)
     end
     return self
   end
@@ -102,11 +103,6 @@ class Project
   def update_from_pivotal_activity
     return unless uses_pivotal?
     CogentPivotalTrackerActivity.new(self.pivotal_id, self.pivotal_activity_feed_id).each do |action|
-      puts action.atom_id
-      puts action.story_id
-      puts action.name
-      puts action.action
-      puts action.new_state
       status = StoryStatus.first(:atom_id => action.atom_id)
       if !status && action.new_state # ignore comments etc
         story = Story.first(:pivotal_id => action.story_id)
@@ -125,11 +121,20 @@ class Project
   
   private
 
-  def ensure_pivotal_story(pivotal_id, name)
+  require 'pp'
+
+  def ensure_pivotal_story(pivotal_id, name, current_state)
     story = self.stories(:pivotal_id => pivotal_id).first || ::Story.new(:project_id => self.id, :pivotal_id => pivotal_id)
     if story.name != name
       story.name = name
-      story.save
+      story.validate_and_save
+      pp story.errors
+    end
+    if story.current_state != current_state
+      pp "Story = #{story.id}"
+      status = StoryStatus.new(:story => story, :person_name =>'' , :status => current_state, :datetime => Time.new)
+      status.validate_and_save
+      pp status.errors
     end
   end
   
