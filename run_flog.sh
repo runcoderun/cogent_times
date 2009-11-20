@@ -1,1 +1,1 @@
-find app -name \*.rb | xargs flog
+find app -name \*.rb | xargs flog -d

@@ -31,26 +31,17 @@ class ApplicationController < ActionController::Base
       year_key = "#{property}(1i)"
       month_key = "#{property}(2i)"
       day_key = "#{property}(3i)"
-      value = Date.civil(params[object][year_key].to_i,params[object][month_key].to_i,params[object][day_key].to_i)
-      self.params[object].delete(year_key)
-      self.params[object].delete(month_key)
-      self.params[object].delete(day_key)
-      self.params[object][property] = value
+      year = self.params[object].delete(year_key).to_i
+      month = self.params[object].delete(month_key)
+      day = self.params[object].delete(day_key)
+      self.params[object][property] = Date.civil(year,month,day)
     end
     return self.params[object][property]
   end
   
   def extract_select_date_value(prefix)
-    puts self.params[prefix]
     if self.params[prefix].class != Date
-      puts 'Date components'
-      puts self.params[prefix]
-      puts self.params[prefix].class
-      puts params[prefix]['year']
-      puts params[prefix]['month']
-      puts params[prefix]['day']
-      value = Date.civil(params[prefix]['year'].to_i,params[prefix]['month'].to_i,params[prefix]['day'].to_i)
-      self.params[prefix] = value
+      self.params[prefix] = Date.civil(params[prefix]['year'].to_i,params[prefix]['month'].to_i,params[prefix]['day'].to_i)
     end
     return self.params[prefix]
   end

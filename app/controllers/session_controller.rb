@@ -16,15 +16,10 @@ class SessionController < ApplicationController
   end
  
   def create
-    request_token = OAuth::RequestToken.new(get_consumer, params[:oauth_token], session[:oauth_secret])
     access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     xml = ::XmlSimple.xml_in(access_token.get("https://www.google.com/m8/feeds/contacts/default/full/").body)
-    email = xml["author"].first["email"].first
-    user = User.first(:email => email)
-    user.name = xml["author"].first["name"].first
-    user.oauth_token  =  access_token.token
-    user.oauth_secret =  access_token.secret
-    user.save
+    update_user(xml, access_token)
+    user = updated_user(xml, access_token)
     session[:user_id] = user.id
     redirect_to post_authentication_url
   end
@@ -35,6 +30,27 @@ class SessionController < ApplicationController
   end
   
   private
+
+  def updated_user(xml, access_token)
+    user = User.first(:email => email_from(xml))
+    user.name = name_from(xml)
+    user.oauth_token  =  access_token.token
+    user.oauth_secret =  access_token.secret
+    user.save
+    return user
+  end
+  
+  def request_token
+    OAuth::RequestToken.new(get_consumer, params[:oauth_token], session[:oauth_secret])
+  end
+  
+  def email_from(xml)
+    xml["author"].first["email"].first
+  end
+
+  def name_from(xml)
+    xml["author"].first["name"].first
+  end
   
   def get_consumer
     return OAuth::Consumer.new(oath_consumer_key, oauth_consumer_secret, oauth_consumer_options)

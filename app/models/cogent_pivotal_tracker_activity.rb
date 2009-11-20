@@ -9,21 +9,12 @@ class CogentPivotalTrackerActivity
   end
   
   def each
-    require 'pp'
     rss.entries.each do |entry|
-      pp entry
-      story_id = /\d*$/.match(entry.link)[0]
-      activity_text = /<p>(.*)<\/p>/.match(entry.content)[1]
-      name_and_action = /^(.*?)&quot;/.match(activity_text)[1]
-      name_and_action_match = /(delivered|rejected|added comment|added|finished|started):*$/.match(name_and_action.strip)
-      if name_and_action_match
-        name = name_and_action_match.pre_match
-        action = name_and_action_match[1]
-        yield PivotalTrackerAction.new(entry[:id], story_id, name, action, entry[:updated])
+      activity = RssActivity.new(entry)
+      if activity.name && activity.action
+        yield PivotalTrackerAction.new(activity.rss_id, activity.story_id, activity.name, activity.action, activity.updated)
       else
-        error = Error.new(:text => "Could not parse name and action out of #{name_and_action}", :datetime => Time.now)
-        error.save
-        pp error.errors
+        Error.record("Could not parse name and action out of #{name_and_action}")
       end
     end
   end
@@ -35,6 +26,44 @@ class CogentPivotalTrackerActivity
     return SimpleRSS.parse open(url)
   end
   
+end
+
+class RssActivity
+
+  attr_reader :entry
+  
+  def initialize(entry)
+    @entry = entry
+  end
+  
+  def updated
+    return entry[:updated]
+  end
+  
+  def rss_id
+    return entry[:id]
+  end
+  
+  def story_id
+    /\d*$/.match(entry.link)[0]
+  end
+  
+  def name
+    @name ||= name_and_action_match ? name_and_action_match.pre_match : nil
+  end
+  
+  def action
+    @action ||= name_and_action_match ? name_and_action_match[1] : nil
+  end
+  
+  private
+  
+  def name_and_action_match
+    @activity_text ||= /<p>(.*)<\/p>/.match(entry.content)[1]
+    @name_and_action ||= /^(.*?)&quot;/.match(activity_text)[1]
+    @name_and_action_match ||= /(delivered|rejected|added comment|added|finished|started):*$/.match(@name_and_action.strip)
+  end
+    
 end
 
 class PivotalTrackerAction
@@ -62,10 +91,3 @@ class PivotalTrackerAction
   end
   
 end
-
-# CogentPivotalTrackerActivity.new(35924, '7a537df7596d81351ea46056346ffb29').each do |action|
-#   puts action.story_id
-#   puts action.name
-#   puts action.action
-#   puts action.new_state
-# end
