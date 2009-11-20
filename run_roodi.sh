@@ -1,0 +1,1 @@
+roodi "app/**/*.rb"
