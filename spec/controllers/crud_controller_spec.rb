@@ -62,8 +62,6 @@ shared_examples_for 'any crud controller' do
       end
       if model_class.is_relationship?(key)
         parameters[key] = value.id
-        # parameters["#{key}_id"] = value.id
-        # parameters.delete(key)
       end
     end
     return parameters

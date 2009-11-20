@@ -26,22 +26,16 @@ class ApplicationController < ActionController::Base
     'UYAvgbsvem0R5ZYaxm7gmmK0'
   end
   
-  def extract_date_select_value(object, property)
-    if !self.params[object][property]
-      year_key = "#{property}(1i)"
-      month_key = "#{property}(2i)"
-      day_key = "#{property}(3i)"
-      year = self.params[object].delete(year_key).to_i
-      month = self.params[object].delete(month_key)
-      day = self.params[object].delete(day_key)
-      self.params[object][property] = Date.civil(year,month,day)
+  def extract_date_select_value(object, attribute)
+    if !self.params[object][attribute]
+      self.params[object][attribute] = date_from_date_select_tag(object, attribute)
     end
-    return self.params[object][property]
+    return self.params[object][attribute]
   end
   
-  def extract_select_date_value(prefix)
+  def extract_select_date_value(attribute)
     if self.params[prefix].class != Date
-      self.params[prefix] = Date.civil(params[prefix]['year'].to_i,params[prefix]['month'].to_i,params[prefix]['day'].to_i)
+      self.params[prefix] = date_from_select_date_field(attribute)
     end
     return self.params[prefix]
   end
@@ -51,7 +45,23 @@ class ApplicationController < ActionController::Base
     params[object][property] = value
   end
   
-    # Scrub sensitive parameters from your log
+  private
+  
+  def date_from_select_date_field(attribute)
+    Date.civil(params[attribute]['year'].to_i,params[attribute]['month'].to_i,params[attribute]['day'].to_i)
+  end
+  
+  def date_from_date_select_tag(object, attribute)
+    year_key = "#{attribute}(1i)"
+    month_key = "#{attribute}(2i)"
+    day_key = "#{attribute}(3i)"
+    year = self.params[object].delete(year_key).to_i
+    month = self.params[object].delete(month_key)
+    day = self.params[object].delete(day_key)
+    return Date.civil(year,month,day)
+  end
+  
+  # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
   # def rescue_action(exception)

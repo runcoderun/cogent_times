@@ -33,7 +33,7 @@ module UtilisationsHelper
       :animation => chart_animation,
       :data_labels => pie_chart_data_labels,
       :legend => pie_chart_legend,
-      :labels => pie_chart_labels
+      :labels => pie_chart_labels(heading)
     })
   end
 
@@ -66,7 +66,7 @@ module UtilisationsHelper
     } 
   end
   
-  def pie_chart_labels
+  def pie_chart_labels(heading)
     { :label =>
         {:x => 150, :y => 10, :text => cdata_section("<b>#{heading}</b>"),
           :text_size => 24, :text_color => '#0265AC'} }  
