@@ -12,5 +12,6 @@ class StoryStatus
    
    belongs_to :story
    validates_present :story
+   is :list, :scope => [:story_id]
 
 end
