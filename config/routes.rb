@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
     project.resources :stories, :collection => {:synchronise => :put ,:activity => :put} do |story|
       story.resources :story_statuses
     end
+    project.resources :status_changes
     project.resources :expenses
   end
   map.resources :project_costs

@@ -115,6 +115,10 @@ class Project
   def pivotal_tracker
     @pivotal_tracker ||= CogentPivotalTracker.new(self.pivotal_id)
   end
+
+  def status_changes
+    []
+  end
   
   private
 

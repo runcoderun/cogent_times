@@ -1,0 +1,11 @@
+%p
+= form_tag('/status_changes/select')
+= hidden_field_tag 'project_id', @project_id
+Start Date: 
+= select_date(@start_date || Date.today, :prefix => 'start_date')
+%br
+End Date: 
+= select_date(@end_date || Date.today, :prefix => 'end_date')
+%br
+= submit_tag "Select"
+= "</form>"
