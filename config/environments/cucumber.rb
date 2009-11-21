@@ -1,3 +1,7 @@
+def load_plugin_or_gem(config, name, version_spec)
+  config.gem name, :lib => false, :version => version_spec unless File.directory?(File.join(Rails.root, "vendor/plugins/#{name}"))
+end
+
 config.cache_classes = true # This must be true for Cucumber to operate correctly!
 
 # Log error messages when you accidentally call methods on nil.
@@ -15,8 +19,13 @@ config.action_controller.allow_forgery_protection    = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
-config.gem 'cucumber',    :lib => false,        :version => '>=0.3.103' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber'))
-config.gem 'webrat',      :lib => false,        :version => '>=0.5.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
-config.gem 'rspec',       :lib => false,        :version => '>=1.2.8' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
-config.gem 'rspec-rails', :lib => false,        :version => '>=1.2.7.1' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
+load_plugin_or_gem(config, 'cucumber', '>=0.3.103')
+load_plugin_or_gem(config, 'webrat', '>=0.5.0')
+load_plugin_or_gem(config, 'rspec', '>=1.2.8')
+load_plugin_or_gem(config, 'rspec-rails', '>=1.2.7.1')
+
+# config.gem 'cucumber',    :lib => false,        :version => '>=0.3.103' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber'))
+# config.gem 'webrat',      :lib => false,        :version => '>=0.5.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
+# config.gem 'rspec',       :lib => false,        :version => '>=1.2.8' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
+# config.gem 'rspec-rails', :lib => false,        :version => '>=1.2.7.1' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 

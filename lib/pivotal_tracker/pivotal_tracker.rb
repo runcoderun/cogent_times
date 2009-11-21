@@ -150,6 +150,8 @@ class PivotalTracker::PivotalTracker
       object.collect do |each|
         coerce_to_filter(each)
       end.join(' ')
+    else
+      raise "Can't coerce #{object.class} to filter"
     end
   end
 end

@@ -1,1 +1,1 @@
-find app -name \*.rb | xargs flog -d
+find app config lib -name \*.rb | xargs flog -d
