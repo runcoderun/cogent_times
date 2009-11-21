@@ -1,5 +1,5 @@
-class PivotalTracker::Story
-  include HappyMapper
+class PivotalTracker::Story < PivotalTracker::Base
+  # include HappyMapper
   element :id, Integer
   element :story_type, String
   element :url, String
@@ -15,23 +15,23 @@ class PivotalTracker::Story
   element :description, String
   has_one :iteration, Iteration
 
-  def initialize(attributes = {})
-    attributes.each do |key, value|
-      send("#{key}=", value)
-    end
-  end
-
-  def to_xml(options = {})
-    builder = Builder::XmlMarkup.new(options)
-    builder.story do |story|
-      Story.elements.each do |element_type|
-        element = send(element_type.name)
-        eval("story.#{element_type.name}(\"#{element.to_s.gsub("\"", "\\\"")}\")") if element
-      end
-    end
-  end
-
-  def to_param
-    id.to_s
-  end
+  # def initialize(attributes = {})
+  #   attributes.each do |key, value|
+  #     send("#{key}=", value)
+  #   end
+  # end
+  # 
+  # def to_xml(options = {})
+  #   builder = Builder::XmlMarkup.new(options)
+  #   builder.story do |story|
+  #     Story.elements.each do |element_type|
+  #       element = send(element_type.name)
+  #       eval("story.#{element_type.name}(\"#{element.to_s.gsub("\"", "\\\"")}\")") if element
+  #     end
+  #   end
+  # end
+  # 
+  # def to_param
+  #   id.to_s
+  # end
 end

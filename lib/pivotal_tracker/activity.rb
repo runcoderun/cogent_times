@@ -7,7 +7,7 @@
 #     <when>11/17/2009 07:06 AM</when>
 #   </activity>
   
-class PivotalTracker::Activity
+class PivotalTracker::Activity < PivotalTracker::Base
   include HappyMapper
   element :id, Integer
   element :project, String
@@ -16,11 +16,11 @@ class PivotalTracker::Activity
   element :author, String
   element :when, DateTime
 
-  def initialize(attributes = {})
-    attributes.each do |key, value|
-      send("#{key}=", value)
-    end
-  end
+  # def initialize(attributes = {})
+  #   attributes.each do |key, value|
+  #     send("#{key}=", value)
+  #   end
+  # end
 
   # def to_xml(options = {})
   #   builder = Builder::XmlMarkup.new(options)
@@ -32,7 +32,7 @@ class PivotalTracker::Activity
   #   end
   # end
 
-  def to_param
-    id.to_s
-  end
+  # def to_param
+  #   id.to_s
+  # end
 end
