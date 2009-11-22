@@ -1,3 +1,15 @@
+class Rake::Task
+  def overwrite(&block)
+    @actions.clear
+    prerequisites.clear
+    enhance(&block)
+  end
+  def abandon
+    prerequisites.clear
+    @actions.clear
+  end
+end
+
 namespace :dm do
   
   desc 'Migrate up to VERSION'
@@ -14,4 +26,11 @@ namespace :dm do
     migrate_down!(ENV['VERSION'])
   end
   
+end
+
+namespace :db do
+  desc 'overridden database migration'
+  Rake::Task[:migrate].overwrite do
+    Rake::Task['dm:migrate'].invoke
+  end
 end
