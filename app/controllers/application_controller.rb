@@ -34,10 +34,10 @@ class ApplicationController < ActionController::Base
   end
   
   def extract_select_date_value(attribute)
-    if self.params[prefix].class != Date
-      self.params[prefix] = date_from_select_date_field(attribute)
+    if self.params[attribute].class != Date
+      self.params[attribute] = date_from_select_date_field(attribute)
     end
-    return self.params[prefix]
+    return self.params[attribute]
   end
   
   def make_param_float(object, property)

@@ -1,5 +1,7 @@
 class PivotalTracker::Task  < PivotalTracker::Base
 
+  include HappyMapper
+
   element :id, Integer
   element :description, String
   element :position, Integer

@@ -1,0 +1,27 @@
+%h3= "#{project.name} Project"
+%table
+  %tr
+    %th Name
+    %th Hours
+    %th Days
+    %th Daily Rate
+    %th Billable
+    %th Costs
+    %th Margin
+  - project.timesheets.each do |timesheet|
+    %tr
+      %td= timesheet.person.full_name
+      %td= "#{timesheet.total} hours"
+      %td= "#{timesheet.total / SystemSetting.hours_per_day} days"
+      %td= "@ #{currencify(timesheet.rate)}"
+      %td= currencify(timesheet.billing)
+      %td= currencify(timesheet.costs)
+      %td= currencify(timesheet.margin)
+  %tr
+    %td &nbsp;
+    %td= "#{project.total} hours"
+    %td= "#{project.total / SystemSetting.hours_per_day} days"
+    %td &nbsp;
+    %td= currencify(project.billing)
+    %td= currencify(project.costs)
+    %td= currencify(project.margin)

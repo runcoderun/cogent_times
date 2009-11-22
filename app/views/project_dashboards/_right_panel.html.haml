@@ -1,0 +1,9 @@
+%h4 Statuses Changed in the period
+%table
+  %tr
+    %th Story Id
+    %th Story Name
+    %th Status
+    %th When
+  = render :partial => 'status', :collection => @statuses
+

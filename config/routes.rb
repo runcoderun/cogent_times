@@ -1,6 +1,7 @@
 def project_routes(map)
   map.resources :project_categories
   map.resources :projects do |project|
+    project.resource :project_dashboard, :member => {:select => :post}
     project.resources :stories, :collection => {:synchronise => :put ,:activity => :put} do |story|
       story.resources :story_statuses
     end
@@ -24,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :timesheets, :member => { :project_total => :get, :date_total => :get, :total => :get } 
   map.resources :billings
-  map.resources :utilisations, :collection => {:select_date_range => :post, :pie_data => :get}
+  map.resources :utilisations, :collection => {:select_date_range => :post}
   map.resources :timesheet_checks, :member => { :reminder => :post }
   map.resources :costs
   

@@ -1,0 +1,6 @@
+= render :partial => 'status_summary'
+%h2 Costs
+= render :partial => '/billings/billings'
+%br
+%br
+= link_to 'Timesheet checks', timesheet_checks_url(:date => @end_date)

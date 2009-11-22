@@ -1,6 +1,6 @@
 %p
-= form_tag('/status_changes/select')
-= hidden_field_tag 'project_id', @project_id
+= form_tag('/project_dashboards/select')
+= hidden_field_tag 'project_id', @project.id
 Start Date: 
 = select_date(@start_date || Date.today, :prefix => 'start_date')
 %br

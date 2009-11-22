@@ -20,6 +20,7 @@ class Project
   has n, :work_periods, :constraint => :protect
   has n, :stories, :constraint => :destroy
   has n, :expenses, :constraint => :destroy
+  # has n, :story_statuses, :through => :stories
   
   delegate :use_in_reports, :to => :project_category
 
@@ -117,7 +118,11 @@ class Project
   end
 
   def status_changes
-    []
+    (self.stories.collect &:last_story_status_change).compact
+  end
+  
+  def latest_statuses_in(date_range)
+    (self.stories.collect {|story| story.latest_story_status_in(date_range)}).compact
   end
   
   private

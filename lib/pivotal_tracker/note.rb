@@ -1,5 +1,7 @@
 class PivotalTracker::Note < PivotalTracker::Base
 
+  include HappyMapper
+
   element :id, Integer
   element :text, String
   element :author, String

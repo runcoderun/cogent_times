@@ -1,5 +1,5 @@
 %tr
-  %td= status_change.id
-  %td= status_change.datetime.to_s
-  %td= 'From text'
-  %td= 'To text'
+  %td= status_change.story_id
+  %td= status_change.datetime.strftime('%Y-%m-%d %H:%M:%S')
+  %td= status_change.from_status
+  %td= status_change.to_status

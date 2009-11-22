@@ -1,0 +1,9 @@
+%h4 Status Summary
+%table
+  %tr
+    %th Status
+    %th Count
+  - @status_summary.each do |status_text, statuses|
+    %tr
+      %td= status_text
+      %td= statuses.size

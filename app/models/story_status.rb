@@ -14,4 +14,8 @@ class StoryStatus
    validates_present :story
    is :list, :scope => [:story_id]
 
+   def change
+     StoryStatusChange.new(self, self.left_sibling)
+    end
+    
 end

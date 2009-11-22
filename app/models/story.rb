@@ -23,9 +23,18 @@ class Story
      current_story_status ? current_story_status.status : 'Unknown'
    end
    
+   def last_story_status_change
+     current_story_status ? current_story_status.change : nil
+   end
+   
+   def latest_story_status_in(date_range)
+     self.story_statuses(:datetime => date_range).first
+   end
+   
    private
    
    def current_story_status
      self.story_statuses.first
    end
+   
 end
