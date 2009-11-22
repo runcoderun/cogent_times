@@ -19,7 +19,7 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "do_postgres"
+  config.gem "do_postgres", :version => '0.9.11'
   config.gem "dm-core", :version => '0.9.11'
   config.gem "dm-migrations", :version => '0.9.11'
   config.gem "dm-constraints", :version => '0.9.11'
