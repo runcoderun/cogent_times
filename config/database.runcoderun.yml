@@ -1,9 +1,9 @@
 development:
-  adapter: postgres
+  adapter: postgresql
   database: runcoderun_cogent_times_development
 
 test: &TEST
-  adapter: postgres
+  adapter: postgresql
   database: runcoderun_cogent_times_test
 
 cucumber:
