@@ -1,10 +1,10 @@
 development:
-    :adapter: postgres
-    :database: sxh_cogent_times_development
+  adapter: postgres
+  database: sxh_cogent_times_development
 
 test: &TEST
-    :adapter: postgres
-    :database: sxh_cogent_times_test
+  adapter: postgres
+  database: sxh_cogent_times_test
 
 cucumber:
   <<: *TEST

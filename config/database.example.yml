@@ -1,24 +1,16 @@
 development:
-    :adapter: postgres
-    :database: cogent_times_development
+  adapter: postgres
+  database: cogent_times_development
 
 test: &TEST
-    :adapter: postgres
-    :database: cogent_times_test
-
-# test: &TEST
-#     :adapter: postgres
-#     :database: sxh_cogent_times_test
-#     :username: build
-#     :password: 
+  adapter: postgres
+  database: cogent_times_test
 
 production:
-    :adapter: postgres
-    :database: cogent_times_production
-    # username: salary
-    # password: salary06
- 
- 
+  adapter: postgres
+  database: cogent_times_production
+  # username: salary
+  # password: salary06
 
 cucumber:
   <<: *TEST
