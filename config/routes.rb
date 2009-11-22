@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :utilisations, :collection => {:select_date_range => :post}
   map.resources :timesheet_checks, :member => { :reminder => :post }
   map.resources :costs
+  map.resources :statuses
   
   # move these to a namespace
   project_routes(map)

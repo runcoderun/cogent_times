@@ -7,7 +7,7 @@ class Status
    property :id,          Serial
    property :description, String, :nullable => false
    
-   has n, :story_statuses, :constraint => :protect
+   has n, :story_statuses, :constraint => :destroy
    has n, :daily_story_statuses, :constraint => :protect
 
 end
