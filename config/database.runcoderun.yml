@@ -1,10 +1,10 @@
 development:
   adapter: postgres
-  database: sxh_cogent_times_development
+  database: runcoderun_cogent_times_development
 
 test: &TEST
   adapter: postgres
-  database: sxh_cogent_times_test
+  database: runcoderun_cogent_times_test
 
 cucumber:
   <<: *TEST
