@@ -1,0 +1,85 @@
+--- !ruby/object:Gem::Specification 
+name: dm-constraints
+version: !ruby/object:Gem::Version 
+  version: 0.9.11
+platform: ruby
+authors: 
+- Dirkjan Bussink
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-03-29 00:00:00 +11:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: dm-core
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - "="
+      - !ruby/object:Gem::Version 
+        version: 0.9.11
+    version: 
+description: DataMapper plugin constraining relationships
+email: 
+- d.bussink [a] gmail [d] com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README.txt
+- LICENSE
+- TODO
+- History.txt
+files: 
+- History.txt
+- LICENSE
+- Manifest.txt
+- README.txt
+- Rakefile
+- TODO
+- lib/dm-constraints.rb
+- lib/dm-constraints/data_objects_adapter.rb
+- lib/dm-constraints/delete_constraint.rb
+- lib/dm-constraints/mysql_adapter.rb
+- lib/dm-constraints/postgres_adapter.rb
+- lib/dm-constraints/version.rb
+- spec/integration/constraints_spec.rb
+- spec/spec.opts
+- spec/spec_helper.rb
+- tasks/install.rb
+- tasks/spec.rb
+has_rdoc: true
+homepage: http://github.com/sam/dm-more/tree/master/dm-constraints
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --main
+- README.txt
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: datamapper
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 2
+summary: DataMapper plugin constraining relationships
+test_files: []
+
