@@ -1,7 +1,5 @@
 class ProjectDashboardsController < SecureController
   
-  require 'pp'
-  
   include DateRangeSelection
 
   def select
@@ -10,7 +8,6 @@ class ProjectDashboardsController < SecureController
   end
   
   def show
-    pp params
     @project = Project.get(params[:project_id])
     @start_date = start_date
     @end_date = end_date

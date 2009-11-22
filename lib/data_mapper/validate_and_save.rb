@@ -5,6 +5,7 @@ module DataMapper
         text = (self.errors.collect &:to_s).join(', ')
         raise text
       end
+      return self
     end
   end
 end

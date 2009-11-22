@@ -14,9 +14,15 @@ Project.blueprint do
   project_category { ProjectCategory.make }
 end
 
+Story.blueprint do
+  name { Sham.name }
+  project { Project.make }
+end
+
 WorkPeriod.blueprint do
   person  { Person.make }
   project  { Project.make }
   date  { Date.today }
   hours  { 9.6 }
 end
+
