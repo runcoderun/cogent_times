@@ -28,7 +28,7 @@ class Story
    end
    
    def latest_story_status_in(date_range)
-     self.story_statuses(:datetime => date_range).first
+     StoryStatus.first(:datetime => date_range, :story_id => self.id, :order => [ :datetime.desc ])
    end
    
    private
