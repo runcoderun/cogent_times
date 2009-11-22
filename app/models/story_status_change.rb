@@ -13,11 +13,11 @@ class StoryStatusChange
   end
   
   def from_status
-    @earlier_status ? @earlier_status.status : 'Unknown'
+    @earlier_status ? @earlier_status.status_text : 'Unknown'
   end
   
   def to_status
-    @later_status.status
+    @later_status.status_text
   end
   
 end

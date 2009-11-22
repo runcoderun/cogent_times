@@ -24,6 +24,10 @@ class Project
   
   delegate :use_in_reports, :to => :project_category
 
+  def self.synch_all_with_pivotal
+    self.all.each {|project| project.synchronise_with_pivotal}
+  end
+  
   def self.leave_without_pay
     Project.first(:name => 'Leave Without Pay')
   end
@@ -94,10 +98,7 @@ class Project
   end
   
   def synchronise_with_pivotal
-    return unless uses_pivotal?
-    pivotal_tracker.stories.each do |story|
-      ensure_pivotal_story(story.id, story.name, story.current_state.capitalize)
-    end
+    ensure_has_all_pivotal_stories if uses_pivotal?
     return self
   end
   
@@ -127,15 +128,26 @@ class Project
   
   private
 
-  def ensure_pivotal_story(pivotal_id, name, current_state)
+  def pivotal_tracker_stories
+    return pivotal_tracker.stories
+  end
+  
+  def ensure_has_all_pivotal_stories
+    pivotal_tracker_stories.each do |story|
+      ensure_has_pivotal_story(story.id, story.name, story.current_state.capitalize)
+    end
+  end
+
+  def ensure_has_pivotal_story(pivotal_id, name, current_state)
     story = self.stories(:pivotal_id => pivotal_id).first || ::Story.new(:project_id => self.id, :pivotal_id => pivotal_id)
     if story.name != name
       story.name = name
       story.validate_and_save
     end
     if story.current_state != current_state
-      status = StoryStatus.new(:story => story, :person_name =>'' , :status => current_state, :datetime => Time.new)
-      status.validate_and_save
+      status = Status.first_by_description(current_state)
+      story_status = StoryStatus.new(:story => story, :person_name =>'' , :status => status, :datetime => Time.new)
+      story_status.validate_and_save
     end
   end
   

@@ -3,7 +3,7 @@
   %tr
     %th Status
     %th Count
-  - @status_summary.each do |status_text, statuses|
+  - @status_summary.each do |status, statuses|
     %tr
-      %td= status_text
+      %td= status.description
       %td= statuses.size

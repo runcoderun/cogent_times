@@ -1,3 +1,3 @@
 task :cron => :environment do
- Project.all.each {|project| project.synchronise_with_pivotal}
+ Project.synch_all_with_pivotal
 end
