@@ -6,10 +6,11 @@ class StoryStatus
    
    property :id,          Serial
    property :atom_id,     String, :nullable => true
-   property :status,      String, :nullable => false
+   property :status_text, String, :nullable => false
    property :person_name, String, :nullable => true
    property :datetime,    DateTime
    
+   belongs_to :status
    belongs_to :story
    validates_present :story
    is :list, :scope => [:story_id]

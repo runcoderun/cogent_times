@@ -10,6 +10,7 @@ class Story
    
    belongs_to :project
    has n, :story_statuses, :order => [ :datetime.desc ], :constraint => :destroy
+   has n, :daily_story_statuses, :order => [ :date.desc ], :constraint => :destroy
    
    validates_present :project
 
@@ -29,6 +30,10 @@ class Story
    
    def latest_story_status_in(date_range)
      StoryStatus.first(:datetime => date_range, :story_id => self.id, :order => [ :datetime.desc ])
+   end
+   
+   def story_status_on(date)
+     StoryStatus.first(:datetime.lte => date, :story_id => self.id, :order => [ :datetime.desc ])
    end
    
    private
