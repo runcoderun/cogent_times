@@ -15,16 +15,9 @@ def runcoderun?
   ENV["RUN_CODE_RUN"]
 end
 
-if runcoderun?
-  Rake::Task[:default].overwrite do
-    # Rake::Task['gems:build'].invoke
-    Rake::Task['dm:migrate'].invoke
-    Rake::Task['rcov:all'].invoke
-  end
-else
-  # task :default => ['rcov:all']
-  Rake::Task[:default].overwrite do
-    Rake::Task['dm:migrate'].invoke
-    Rake::Task['rcov:all'].invoke
-  end
+Rake::Task[:default].overwrite do
+  Rake::Task['dm:migrate'].invoke
+  # TODO Migrate test database
+  Rake::Task['rcov:all'].invoke
 end
+
