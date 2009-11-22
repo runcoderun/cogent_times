@@ -8,6 +8,7 @@
   %td= project.fixed_daily_rate
   %td= project.pivotal_id
   %td= project.pivotal_activity_feed_id
+  %td= link_to "Dashboard", project_project_dashboard_url(project.id)
   %td= link_to "Expenses", project_expenses_url(project.id)
   %td= link_to "Stories", project_stories_url(project.id)
   %td= link_to "Status Changes", project_status_changes_url(project.id)
