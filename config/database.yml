@@ -5,7 +5,13 @@ development:
 test: &TEST
     :adapter: postgres
     :database: cogent_times_test
-  
+
+# test: &TEST
+#     :adapter: postgres
+#     :database: sxh_cogent_times_test
+#     :username: build
+#     :password: 
+
 production:
     :adapter: postgres
     :database: cogent_times_production
