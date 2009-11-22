@@ -3,25 +3,25 @@ require File.expand_path(File.dirname(__FILE__) + '/foreign_keys')
 migration 32, :add_daily_story_status do
     
   up do
-    # create_table :statuses do
-    #   column :id, Integer, :serial => true, :nullable? => false
-    #   column :description, String
-    # end
-    # 
-    # create_table :daily_story_statuses do
-    #   column :id, Integer, :serial => true, :nullable? => false
-    #   column :story_id, Integer, :nullable? => false
-    #   column :date, Date, :nullable? => false
-    #   column :status_id, Integer, :nullable? => false
-    # end
-    # 
-    # modify_table :story_statuses do
-    #   add_column :status_id, Integer
-    # end
-    # 
-    # foreign_key(:daily_story_statuses, :story_id, :stories)
-    # foreign_key(:daily_story_statuses, :status_id, :statuses)
-    # foreign_key(:story_statuses, :status_id, :statuses)
+    create_table :statuses do
+      column :id, Integer, :serial => true, :nullable? => false
+      column :description, String
+    end
+    
+    create_table :daily_story_statuses do
+      column :id, Integer, :serial => true, :nullable? => false
+      column :story_id, Integer, :nullable? => false
+      column :date, Date, :nullable? => false
+      column :status_id, Integer, :nullable? => false
+    end
+    
+    modify_table :story_statuses do
+      add_column :status_id, Integer
+    end
+    
+    foreign_key(:daily_story_statuses, :story_id, :stories)
+    foreign_key(:daily_story_statuses, :status_id, :statuses)
+    foreign_key(:story_statuses, :status_id, :statuses)
     
     StoryStatus.all.each do |story_status|
       text = story_status.status_text
