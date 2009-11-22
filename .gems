@@ -1,5 +1,5 @@
-dm-constraints --version 0.9.10
+dm-constraints --version 0.9.11
 mojodna-oauth --version 0.3.6 --source gems.github.com
 happymapper --version 0.3.0
 simple-rss --version 1.2
-dm-is-list --version 0.9.10
+dm-is-list --version 0.9.11

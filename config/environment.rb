@@ -21,11 +21,15 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "do_postgres"
   config.gem "dm-core", :version => '0.9.11'
-  config.gem "dm-migrations"#, :version => '0.9.11'
-  config.gem "dm-constraints"#, :version => '0.9.11'
-  config.gem "dm-validations"#, :version => '0.9.11'
-  config.gem "dm-timestamps"#, :version => '0.9.11'
-  config.gem "dm-is-list"#, :version => '0.9.11'
+  config.gem "dm-migrations", :version => '0.9.11'
+  config.gem "dm-constraints", :version => '0.9.11'
+  config.gem "dm-validations", :version => '0.9.11'
+  config.gem "dm-timestamps", :version => '0.9.11'
+  config.gem "dm-is-list", :version => '0.9.11'
+  config.gem "happymapper", :version => '0.3.0'
+  config.gem "simple-rss", :version => '1.2'
+  config.gem "mojodna-oauth", :lib => 'oauth', :version => '0.3.6', :source => "http://gems.github.com"
+  
   # config.gem "xml-simple"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
