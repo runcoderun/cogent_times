@@ -56,8 +56,8 @@ class ApplicationController < ActionController::Base
     month_key = "#{attribute}(2i)"
     day_key = "#{attribute}(3i)"
     year = self.params[object].delete(year_key).to_i
-    month = self.params[object].delete(month_key)
-    day = self.params[object].delete(day_key)
+    month = self.params[object].delete(month_key).to_i
+    day = self.params[object].delete(day_key).to_i
     return Date.civil(year,month,day)
   end
   
